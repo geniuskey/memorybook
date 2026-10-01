@@ -25,7 +25,7 @@ python3 -m http.server 8000   # → http://localhost:8000
 | 09 | chapters/vnand.html | 3D NAND 3D 구조, 채널 홀, 계단, CMOS 언더 어레이 |
 | 10 | chapters/ssd.html | FTL, 가비지 컬렉션, 쓰기 증폭, 웨어 레벨링, NVMe |
 | 11 | chapters/reliability.html | 리텐션, 로우 해머, 디스터브, 해밍 코드~LDPC |
-| 12 | chapters/emerging.html | MRAM, PCM, ReRAM, FeRAM, CXL, PIM |
+| 12 | chapters/emerging.html | MRAM, PCM, ReRAM, FeRAM, CXL, PIM, CIM |
 | 13 | chapters/design.html | 루프라인, LLM 메모리 계산, 메모리 시스템 설계 플레이그라운드 |
 | 14 | chapters/glossary.html | 용어집, 종합 퀴즈(20문항) |
 

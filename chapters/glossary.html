@@ -325,6 +325,9 @@
     { ko: "스토리지 클래스 메모리", en: "Storage-class memory", abbr: "SCM", def: "DRAM과 NAND 사이의 지연·가격을 노린 비휘발 메모리 계층. 3D XPoint(Optane)가 대표였으나 2022년 사업이 종료되었다.", ch: "emerging" },
     { ko: "컴퓨트 익스프레스 링크", en: "Compute Express Link", abbr: "CXL", def: "PCIe 물리층 위에서 캐시 일관성 있는 메모리 접근을 제공하는 인터커넥트. CXL.mem으로 메모리 확장·풀링을 하며 로컬 DRAM보다 약 100 ns 정도 지연이 추가된다.", ch: "emerging" },
     { ko: "프로세싱 인 메모리", en: "Processing-in-memory", abbr: "PIM", def: "메모리 칩(또는 뱅크) 안에 연산기를 넣어 데이터를 밖으로 옮기지 않고 처리하는 구조. 내부 뱅크 대역폭을 활용해 메모리 바운드 연산의 에너지를 줄인다.", ch: "emerging" },
+    { ko: "프로세싱 니어 메모리", en: "Processing-near-memory", abbr: "PNM", def: "메모리 다이 밖의 가까운 곳(모듈 버퍼 칩, CXL 컨트롤러, HBM 베이스 다이)에 연산기를 두는 구조. 로직 공정을 쓸 수 있지만 대역폭 이득은 PIM보다 작다.", ch: "emerging" },
+    { ko: "컴퓨팅 인 메모리", en: "Computing-in-memory", abbr: "CIM", def: "셀 어레이 자체의 물리(저항 전류의 합, 비트라인 전하 공유)로 연산하는 구조. 멤리스터 크로스바의 아날로그 행렬-벡터 곱과 SRAM-CIM이 대표적이다.", ch: "emerging" },
+    { ko: "멤리스터", en: "Memristor", abbr: "", def: "지나간 전류 이력에 따라 저항이 정해지고 그 값을 유지하는 2단자 소자. ReRAM·PCM을 아날로그 컨덕턴스 소자로 볼 때의 이름으로, CIM의 가중치(시냅스) 소자로 쓰인다.", ch: "emerging" },
 
     // 13 설계
     { ko: "루프라인 모델", en: "Roofline model", abbr: "", def: "달성 가능 성능 = min(최대 연산 성능, 메모리 대역폭 × 산술 강도)로 나타낸 그래프. 커널이 연산 바운드인지 메모리 바운드인지 한눈에 보여 준다.", ch: "design" },

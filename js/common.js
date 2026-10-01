@@ -19,7 +19,7 @@
     { slug: "vnand",       num: "09", title: "3D NAND",                 desc: "수직 채널과 수백 단 적층, 채널 홀·계단 구조·CMOS 언더 어레이를 3D로.", tags: ["구조", "3d", "sim"] },
     { slug: "ssd",         num: "10", title: "SSD와 플래시 컨트롤러",     desc: "FTL, 가비지 컬렉션, 쓰기 증폭, 웨어 레벨링, 오버 프로비저닝, NVMe.", tags: ["시스템", "sim"] },
     { slug: "reliability", num: "11", title: "신뢰성과 오류 정정",        desc: "리텐션, 로우 해머, 디스터브, 내구성. 해밍 코드부터 LDPC까지 ECC.", tags: ["신뢰성", "sim"] },
-    { slug: "emerging",    num: "12", title: "차세대 메모리와 PIM",       desc: "MRAM·PCM·ReRAM·FeRAM, CXL 메모리 확장, 프로세싱 인 메모리(PIM).", tags: ["트렌드", "sim"] },
+    { slug: "emerging",    num: "12", title: "차세대 메모리와 PIM·CIM",   desc: "MRAM·PCM·ReRAM·FeRAM, CXL 메모리 확장, 뱅크 옆 연산(PIM)과 셀 어레이 연산(CIM).", tags: ["트렌드", "sim"] },
     { slug: "design",      num: "13", title: "메모리 시스템 설계",        desc: "루프라인 모델과 AI 가속기 메모리 선택. 대역폭·용량·전력을 직접 설계해 보자.", tags: ["종합", "sim"] },
     { slug: "glossary",    num: "14", title: "용어집 & 종합 퀴즈",        desc: "핵심 용어 100여 개를 검색하고, 종합 퀴즈로 실력을 점검하자.", tags: ["정리"] },
   ];
