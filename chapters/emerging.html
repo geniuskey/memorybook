@@ -5,6 +5,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>차세대 메모리와 PIM·CIM · MemoryBook</title>
 <meta name="description" content="MRAM·PCM·ReRAM·FeRAM/FeFET의 동작 원리와 한계, 3D XPoint의 교훈, CXL 메모리 확장, 그리고 연산기를 메모리 옆으로 옮기는 PIM과 셀 어레이가 직접 연산하는 CIM(멤리스터 크로스바, SRAM-CIM)까지.">
+<link rel="canonical" href="https://memorybook.euiyun.com/chapters/emerging.html">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<meta name="theme-color" content="#0e9384">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="MemoryBook">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="차세대 메모리와 PIM·CIM · MemoryBook">
+<meta property="og:description" content="MRAM·PCM·ReRAM·FeRAM/FeFET의 동작 원리와 한계, 3D XPoint의 교훈, CXL 메모리 확장, 그리고 연산기를 메모리 옆으로 옮기는 PIM과 셀 어레이가 직접 연산하는 CIM(멤리스터 크로스바, SRAM-CIM)까지.">
+<meta property="og:url" content="https://memorybook.euiyun.com/chapters/emerging.html">
+<meta property="og:image" content="https://memorybook.euiyun.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Chapter","LearningResource"],"@id":"https://memorybook.euiyun.com/chapters/emerging.html#chapter","name":"차세대 메모리와 PIM·CIM","headline":"차세대 메모리와 PIM·CIM · MemoryBook","description":"MRAM·PCM·ReRAM·FeRAM/FeFET의 동작 원리와 한계, 3D XPoint의 교훈, CXL 메모리 확장, 그리고 연산기를 메모리 옆으로 옮기는 PIM과 셀 어레이가 직접 연산하는 CIM(멤리스터 크로스바, SRAM-CIM)까지.","url":"https://memorybook.euiyun.com/chapters/emerging.html","position":12,"inLanguage":"ko","isAccessibleForFree":true,"learningResourceType":"인터랙티브 교재","educationalLevel":"공대 학부","image":"https://memorybook.euiyun.com/og.png","dateModified":"2026-10-01","isPartOf":{"@type":"Book","@id":"https://memorybook.euiyun.com/#book","name":"MemoryBook · 메모리 반도체 교과서","url":"https://memorybook.euiyun.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"MemoryBook","item":"https://memorybook.euiyun.com/"},{"@type":"ListItem","position":2,"name":"12. 차세대 메모리와 PIM·CIM","item":"https://memorybook.euiyun.com/chapters/emerging.html"}]}]}</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
@@ -647,7 +661,7 @@
       <li><strong>CXL.cache</strong>: 장치가 호스트 메모리를 일관성 있게 캐싱.</li>
       <li><strong>CXL.mem</strong>: 호스트 CPU가 장치에 붙은 메모리를 일반 load/store로 접근.</li>
     </ul>
-    <p>장치는 조합에 따라 Type 1(캐시만, 예: 스마트 NIC), Type 2(가속기 + 자체 메모리), <span class="term">Type 3</span>(메모리 확장 장치, CXL.io + CXL.mem)로 나뉜다. 메모리 관점에서 중요한 것은 Type 3다. DDR5 DRAM에 CXL 컨트롤러를 붙인 모듈(E3.S 폼팩터나 확장 카드)을 PCIe 슬롯에 꽂으면, 운영체제에는 <strong>CPU 코어가 없는 NUMA 노드</strong>로 보인다. CXL 1.1/2.0은 PCIe 5.0(32 GT/s, x16이면 한 방향 ~64 GB/s), CXL 3.x는 PCIe 6.0(64 GT/s, PAM4)을 기반으로 하며, 2.0부터 스위치를 통한 <span class="term">메모리 풀링</span><span class="en">(pooling)</span>, 3.0부터 여러 호스트의 메모리 공유(sharing)와 패브릭을 지원한다.</p>
+    <p>장치는 조합에 따라 Type 1(캐시만, 예: 스마트 NIC), Type 2(가속기 + 자체 메모리), <span class="term">Type 3</span>(메모리 확장 장치, CXL.io + CXL.mem)로 나뉜다. 메모리 관점에서 중요한 것은 Type 3다. DDR5 DRAM에 CXL 컨트롤러를 붙인 모듈(E3.S 폼팩터나 확장 카드)을 PCIe 슬롯에 꽂으면, 운영체제에는 <strong>CPU 코어가 없는 NUMA 노드</strong>로 보인다. CXL 1.1/2.0은 PCIe 5.0(32 GT/s, x16이면 한 방향 ~64 GB/s), CXL 3.x는 PCIe 6.0(64 GT/s, PAM4), 2025년 말 공개된 CXL 4.0은 PCIe 7.0(128 GT/s)을 기반으로 하며, 2.0부터 스위치를 통한 <span class="term">메모리 풀링</span><span class="en">(pooling)</span>, 3.0부터 여러 호스트의 메모리 공유(sharing)와 패브릭을 지원한다.</p>
 
     <figure class="diagram">
       <svg viewBox="0 0 760 290" role="img" aria-label="CXL 메모리 확장과 풀링">
@@ -724,9 +738,9 @@
         <tr><td>32비트 정수 덧셈</td><td class="num">0.1 pJ</td><td class="num">1×</td></tr>
         <tr><td>16비트 부동소수 곱셈</td><td class="num">1.1 pJ</td><td class="num">11×</td></tr>
         <tr><td>32비트 부동소수 곱셈</td><td class="num">3.7 pJ</td><td class="num">37×</td></tr>
-        <tr><td>32비트 SRAM 읽기 (8 KB)</td><td class="num">~5~10 pJ</td><td class="num">~50~100×</td></tr>
-        <tr><td>32비트 SRAM 읽기 (1 MB)</td><td class="num">~100 pJ</td><td class="num">~1000×</td></tr>
-        <tr><td>32비트 DRAM 읽기 (칩 밖)</td><td class="num">~1.3~2.6 nJ</td><td class="num">~10000×</td></tr>
+        <tr><td>64비트 SRAM 읽기 (8 KB)</td><td class="num">~10 pJ</td><td class="num">~100×</td></tr>
+        <tr><td>64비트 SRAM 읽기 (1 MB)</td><td class="num">~100 pJ</td><td class="num">~1000×</td></tr>
+        <tr><td>64비트 DRAM 읽기 (칩 밖)</td><td class="num">~1.3~2.6 nJ</td><td class="num">~13000~26000×</td></tr>
       </tbody>
     </table></div>
     <p>공정이 7 nm, 5 nm로 가며 연산 에너지는 몇 배 줄었고 HBM3(<a href="hbm.html">7장</a>)의 접근 에너지도 ~3~4 pJ/bit(64비트면 ~200~250 pJ)까지 내려왔지만, 비율은 여전히 비슷하다. FP16 곱셈-누산(FMA) 한 번이 ~1 pJ 미만인데, 그 피연산자 64비트를 DRAM에서 가져오는 데는 수백 pJ가 든다. <strong>연산보다 이동이 100~1000배 비싸다.</strong> 게다가 DRAM 칩 안의 뱅크들은 동시에 활성화하면 칩 핀으로 나오는 대역폭의 수~수십 배에 달하는 내부 대역폭을 갖고 있다. 이것이 연산기를 메모리 쪽으로 옮기자는 <span class="term">PIM</span><span class="en">(Processing-In-Memory)</span>의 출발점이다.</p>

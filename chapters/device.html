@@ -5,6 +5,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>메모리 소자 물리 · MemoryBook</title>
 <meta name="description" content="비트를 저장하는 세 가지 방법, 스위치로서의 MOSFET과 서브스레숄드 스윙, 누설 전류와 온도, 커패시터와 high-k 유전체, 양자 터널링과 Fowler–Nordheim 전류, 스케일링을 시뮬레이터로 익힌다.">
+<link rel="canonical" href="https://memorybook.euiyun.com/chapters/device.html">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<meta name="theme-color" content="#0e9384">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="MemoryBook">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="메모리 소자 물리 · MemoryBook">
+<meta property="og:description" content="비트를 저장하는 세 가지 방법, 스위치로서의 MOSFET과 서브스레숄드 스윙, 누설 전류와 온도, 커패시터와 high-k 유전체, 양자 터널링과 Fowler–Nordheim 전류, 스케일링을 시뮬레이터로 익힌다.">
+<meta property="og:url" content="https://memorybook.euiyun.com/chapters/device.html">
+<meta property="og:image" content="https://memorybook.euiyun.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Chapter","LearningResource"],"@id":"https://memorybook.euiyun.com/chapters/device.html#chapter","name":"메모리 소자 물리","headline":"메모리 소자 물리 · MemoryBook","description":"비트를 저장하는 세 가지 방법, 스위치로서의 MOSFET과 서브스레숄드 스윙, 누설 전류와 온도, 커패시터와 high-k 유전체, 양자 터널링과 Fowler–Nordheim 전류, 스케일링을 시뮬레이터로 익힌다.","url":"https://memorybook.euiyun.com/chapters/device.html","position":2,"inLanguage":"ko","isAccessibleForFree":true,"learningResourceType":"인터랙티브 교재","educationalLevel":"공대 학부","image":"https://memorybook.euiyun.com/og.png","dateModified":"2026-10-01","isPartOf":{"@type":"Book","@id":"https://memorybook.euiyun.com/#book","name":"MemoryBook · 메모리 반도체 교과서","url":"https://memorybook.euiyun.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"MemoryBook","item":"https://memorybook.euiyun.com/"},{"@type":"ListItem","position":2,"name":"02. 메모리 소자 물리","item":"https://memorybook.euiyun.com/chapters/device.html"}]}]}</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
@@ -683,9 +697,9 @@
       </svg>
       <figcaption><b>그림 2-6.</b> 셀 면적을 F² 단위로 비교. 8F²는 접힌 비트라인 구조(<a href="dram-cell.html">4장</a>)의 한계였고, 매립 워드라인과 열린 비트라인으로 6F²가 되었다. 4F²는 트랜지스터를 수직으로 세워야(VCT, Vertical Channel Transistor) 가능하다.</figcaption>
     </figure>
-    <p>DRAM은 2010년대 중반 20 nm 벽에 가까워지자 노드 이름을 숫자 대신 "10 nm급" 안의 세대 기호로 부르기 시작했다. 1x → 1y → 1z → 1a → 1b → 1c 순서이며, 마이크론은 1α·1β·1γ로 쓴다. 제조사는 정확한 치수를 공개하지 않으므로 아래 수치는 업계 분석에 기반한 대략적인 값이다.</p>
+    <p>DRAM은 2010년대 중반 20 nm 벽에 가까워지자 노드 이름을 숫자 대신 "10 nm급" 안의 세대 기호로 부르기 시작했다. 1x → 1y → 1z → 1a → 1b → 1c 순서이며, 마이크론은 1α·1β·1γ로 쓴다. 제조사는 정확한 치수를 공개하지 않으므로 아래 수치는 업계 분석에 기반한 대략적인 값이다. 셀 면적 열은 6 × F²로 계산한 이상값이며, 실제 셀은 워드라인과 비트라인 피치가 달라 이보다 20~40% 크다(1b급 실측 약 0.0012~0.0013 µm²).</p>
     <div class="table-wrap"><table>
-      <thead><tr><th>DRAM 노드</th><th class="num">F (half-pitch, 대략)</th><th class="num">6F² 셀 면적 (대략)</th><th>양산 시기 (대략)</th><th>특징</th></tr></thead>
+      <thead><tr><th>DRAM 노드</th><th class="num">F (half-pitch, 대략)</th><th class="num">6F² 계산값 (이상적)</th><th>양산 시기 (대략)</th><th>특징</th></tr></thead>
       <tbody>
         <tr><td>2x nm</td><td class="num">~20–25 nm</td><td class="num">~0.0024–0.0038 µm²</td><td>~2013–2015</td><td>ArF 액침 + 더블 패터닝</td></tr>
         <tr><td>1x nm</td><td class="num">~18–19 nm</td><td class="num">~0.0020 µm²</td><td>~2016</td><td>10 nm급 명명 시작</td></tr>

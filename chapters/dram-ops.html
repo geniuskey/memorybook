@@ -5,6 +5,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>DRAM 동작과 타이밍 · MemoryBook</title>
 <meta name="description" content="채널·랭크·뱅크 조직, ACT·RD·WR·PRE·REF 명령과 로우 버퍼, tRCD·CL·tRP·tRAS·tFAW 타이밍, 주소 매핑, 리프레시 오버헤드, FR-FCFS 스케줄링과 DRAM 전력까지 — DRAM이 시간 속에서 일하는 방식.">
+<link rel="canonical" href="https://memorybook.euiyun.com/chapters/dram-ops.html">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<meta name="theme-color" content="#0e9384">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="MemoryBook">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="DRAM 동작과 타이밍 · MemoryBook">
+<meta property="og:description" content="채널·랭크·뱅크 조직, ACT·RD·WR·PRE·REF 명령과 로우 버퍼, tRCD·CL·tRP·tRAS·tFAW 타이밍, 주소 매핑, 리프레시 오버헤드, FR-FCFS 스케줄링과 DRAM 전력까지 — DRAM이 시간 속에서 일하는 방식.">
+<meta property="og:url" content="https://memorybook.euiyun.com/chapters/dram-ops.html">
+<meta property="og:image" content="https://memorybook.euiyun.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Chapter","LearningResource"],"@id":"https://memorybook.euiyun.com/chapters/dram-ops.html#chapter","name":"DRAM 동작과 타이밍","headline":"DRAM 동작과 타이밍 · MemoryBook","description":"채널·랭크·뱅크 조직, ACT·RD·WR·PRE·REF 명령과 로우 버퍼, tRCD·CL·tRP·tRAS·tFAW 타이밍, 주소 매핑, 리프레시 오버헤드, FR-FCFS 스케줄링과 DRAM 전력까지 — DRAM이 시간 속에서 일하는 방식.","url":"https://memorybook.euiyun.com/chapters/dram-ops.html","position":5,"inLanguage":"ko","isAccessibleForFree":true,"learningResourceType":"인터랙티브 교재","educationalLevel":"공대 학부","image":"https://memorybook.euiyun.com/og.png","dateModified":"2026-10-01","isPartOf":{"@type":"Book","@id":"https://memorybook.euiyun.com/#book","name":"MemoryBook · 메모리 반도체 교과서","url":"https://memorybook.euiyun.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"MemoryBook","item":"https://memorybook.euiyun.com/"},{"@type":"ListItem","position":2,"name":"05. DRAM 동작과 타이밍","item":"https://memorybook.euiyun.com/chapters/dram-ops.html"}]}]}</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
@@ -607,7 +621,7 @@
     </ol>
     <p>로우 히트를 몰아서 처리하므로 히트율과 처리량이 크게 오른다. 대가는 <em>공정성</em>이다. 로우 히트를 계속 만들어 내는 스트리밍 스레드가 있으면 다른 스레드의 요청은 한없이 밀릴 수 있다(기아, starvation). 그래서 실제 컨트롤러는 요청 나이 상한(age cap), 한 로우에서 연속 히트 횟수 제한, 스레드별 우선순위(ATLAS, TCM 같은 연구) 등을 더한다.</p>
     <h3>명령 버스 파이프라이닝과 쓰기 배치</h3>
-    <p>DDR5에서 ACT는 명령 버스 2사이클을, RD는 1~2사이클을 쓴다. 한 뱅크의 tRCD·CL을 기다리는 동안 명령 버스는 다른 뱅크의 명령으로 채워진다. 잘 스케줄된 컨트롤러는 여러 뱅크의 ACT → RD → PRE 사슬을 엇갈려 겹쳐서 데이터 버스를 연속 버스트로 채운다. 한편 데이터 버스는 양방향이라 읽기 ↔ 쓰기 전환 때마다 tWTR·tRTW만큼 버스가 논다. 그래서 컨트롤러는 쓰기를 버퍼에 모았다가 버퍼가 상한(high watermark)에 이르면 한꺼번에 쓰고(write drain), 하한(low watermark)까지 비우면 다시 읽기로 돌아간다.</p>
+    <p>DDR5에서 ACT와 RD/WR은 명령 버스 2사이클을, PRE는 1사이클을 쓴다. 한 뱅크의 tRCD·CL을 기다리는 동안 명령 버스는 다른 뱅크의 명령으로 채워진다. 잘 스케줄된 컨트롤러는 여러 뱅크의 ACT → RD → PRE 사슬을 엇갈려 겹쳐서 데이터 버스를 연속 버스트로 채운다. 한편 데이터 버스는 양방향이라 읽기 ↔ 쓰기 전환 때마다 tWTR·tRTW만큼 버스가 논다. 그래서 컨트롤러는 쓰기를 버퍼에 모았다가 버퍼가 상한(high watermark)에 이르면 한꺼번에 쓰고(write drain), 하한(low watermark)까지 비우면 다시 읽기로 돌아간다.</p>
 
     <div class="sim" id="sim-sch">
       <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>스케줄러 비교: FCFS vs FR-FCFS</h3></div>

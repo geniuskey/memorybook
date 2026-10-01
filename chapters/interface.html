@@ -5,6 +5,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>DDR·LPDDR·GDDR 인터페이스 · MemoryBook</title>
 <meta name="description" content="DDR 양 에지 전송과 DQS, 프리페치, 세대별 대역폭 계산, 전송선 반사와 ODT, 아이 다이어그램과 이퀄라이저, 트레이닝, NRZ·PAM4·PAM3, DIMM 구조와 I/O 전력.">
+<link rel="canonical" href="https://memorybook.euiyun.com/chapters/interface.html">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<meta name="theme-color" content="#0e9384">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="MemoryBook">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="DDR·LPDDR·GDDR 인터페이스 · MemoryBook">
+<meta property="og:description" content="DDR 양 에지 전송과 DQS, 프리페치, 세대별 대역폭 계산, 전송선 반사와 ODT, 아이 다이어그램과 이퀄라이저, 트레이닝, NRZ·PAM4·PAM3, DIMM 구조와 I/O 전력.">
+<meta property="og:url" content="https://memorybook.euiyun.com/chapters/interface.html">
+<meta property="og:image" content="https://memorybook.euiyun.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Chapter","LearningResource"],"@id":"https://memorybook.euiyun.com/chapters/interface.html#chapter","name":"DDR·LPDDR·GDDR 인터페이스","headline":"DDR·LPDDR·GDDR 인터페이스 · MemoryBook","description":"DDR 양 에지 전송과 DQS, 프리페치, 세대별 대역폭 계산, 전송선 반사와 ODT, 아이 다이어그램과 이퀄라이저, 트레이닝, NRZ·PAM4·PAM3, DIMM 구조와 I/O 전력.","url":"https://memorybook.euiyun.com/chapters/interface.html","position":6,"inLanguage":"ko","isAccessibleForFree":true,"learningResourceType":"인터랙티브 교재","educationalLevel":"공대 학부","image":"https://memorybook.euiyun.com/og.png","dateModified":"2026-10-01","isPartOf":{"@type":"Book","@id":"https://memorybook.euiyun.com/#book","name":"MemoryBook · 메모리 반도체 교과서","url":"https://memorybook.euiyun.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"MemoryBook","item":"https://memorybook.euiyun.com/"},{"@type":"ListItem","position":2,"name":"06. DDR·LPDDR·GDDR 인터페이스","item":"https://memorybook.euiyun.com/chapters/interface.html"}]}]}</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
@@ -22,7 +36,7 @@
   <header class="chapter-hero">
     <div class="eyebrow">Chapter 06</div>
     <h1>DDR·LPDDR·GDDR 인터페이스</h1>
-    <p class="lead">5장에서 DRAM이 명령을 받아 데이터를 꺼내는 순서를 배웠다. 그런데 꺼낸 데이터는 몇 센티미터의 PCB 배선을 지나 프로세서까지 가야 한다. 초당 수십억 번 뒤집히는 전압이 선 위에서 반사되고, 번지고, 옆 선과 간섭하는 세계 — 메모리 인터페이스의 물리층을 이 장에서 다룬다. DDR5 한 핀의 비트 하나는 156 ps, 빛이 약 2.3 cm 가는 시간 동안만 존재한다.</p>
+    <p class="lead">5장에서 DRAM이 명령을 받아 데이터를 꺼내는 순서를 배웠다. 그런데 꺼낸 데이터는 몇 센티미터의 PCB 배선을 지나 프로세서까지 가야 한다. 초당 수십억 번 뒤집히는 전압이 선 위에서 반사되고, 번지고, 옆 선과 간섭하는 세계 — 메모리 인터페이스의 물리층을 이 장에서 다룬다. DDR5 한 핀의 비트 하나는 156 ps, 신호가 PCB 배선 위를 약 2.3 cm 가는 시간 동안만 존재한다.</p>
     <ul class="objectives">
       <li>SDR과 DDR의 차이, 데이터 스트로브(DQS)의 역할, 프리페치가 느린 코어와 빠른 I/O를 잇는 원리를 설명할 수 있다.</li>
       <li>DDR3~5, LPDDR4X~6, GDDR6~7의 핀 속도·버스 폭·전압을 비교하고 \(BW = R_{pin}\times W/8\)로 대역폭을 계산할 수 있다.</li>
@@ -36,7 +50,7 @@
   <!-- ============================================================ 1 -->
   <section id="why">
     <h2>칩 밖으로 나가는 선: 왜 인터페이스가 중요한가</h2>
-    <p>1장에서 본 <span class="term">메모리 월</span><span class="en">(Memory Wall)</span>은 결국 "DRAM 칩에서 프로세서로 초당 몇 바이트를 옮길 수 있는가"의 문제다. DRAM 코어 내부는 한 번의 활성화(ACT)로 8 KB짜리 로우 전체를 센스 앰프에 올려놓을 만큼 병렬성이 풍부하다(4장). 병목은 칩 경계, 즉 <strong>패키지 핀과 PCB 배선</strong>이다. 핀 수는 패키지 크기와 비용 때문에 쉽게 늘릴 수 없으므로, 남은 방법은 <em>핀 하나당 속도</em>를 올리는 것이다.</p>
+    <p>1장에서 본 <span class="term">메모리 월</span><span class="en">(Memory Wall)</span>은 결국 "DRAM 칩에서 프로세서로 초당 몇 바이트를 옮길 수 있는가"의 문제다. DRAM 코어 내부는 한 번의 활성화(ACT)로 칩당 1 KB(8,192비트)짜리 로우 전체를 센스 앰프에 올려놓을 만큼 병렬성이 풍부하다(4장). 병목은 칩 경계, 즉 <strong>패키지 핀과 PCB 배선</strong>이다. 핀 수는 패키지 크기와 비용 때문에 쉽게 늘릴 수 없으므로, 남은 방법은 <em>핀 하나당 속도</em>를 올리는 것이다.</p>
     <p>핀 속도는 20여 년 동안 약 50배 빨라졌다. 2000년 무렵 SDR SDRAM(PC133)이 핀당 0.133 Gb/s였다면, 2024~2025년의 DDR5는 6.4~8.8 Gb/s, 그래픽용 GDDR7은 28~32 Gb/s에 이른다. 이 속도에서는 PCB 배선이 더 이상 '전선'이 아니라 <span class="term">전송선</span><span class="en">(transmission line)</span>이 되고, 비트 하나가 선 위에 머무는 시간이 선을 지나가는 시간보다 짧아진다. 이 장의 주제는 그 결과로 생기는 문제들과 해결책이다.</p>
     <div class="flow">
       <div><b>메모리 컨트롤러</b>명령 스케줄링, 뱅크 관리(5장). 논리 계층.</div>
@@ -208,7 +222,7 @@
         <tr><td>LPDDR4X</td><td class="num">~4.27</td><td>16비트 채널 (패키지당 2~4개)</td><td class="num">0.6 V</td><td>16n · LVSTL</td><td>64비트 @4.27: 34 GB/s</td></tr>
         <tr><td>LPDDR5</td><td class="num">~6.4</td><td>16비트 채널, WCK</td><td class="num">0.5 V</td><td>16n · LVSTL</td><td>64비트: 51.2 GB/s</td></tr>
         <tr><td>LPDDR5X</td><td class="num">~8.5 (최대 ~10.7, 2024~)</td><td>16비트 채널, WCK</td><td class="num">0.5 V</td><td>16n · LVSTL</td><td>128비트 @8.53: 136 GB/s</td></tr>
-        <tr><td>LPDDR6</td><td class="num">~10.7–14.4 (2025 규격)</td><td>24비트 채널 (12비트 서브채널 ×2)</td><td class="num">≲0.5 V</td><td>BL24 · NRZ</td><td>제품화 2026년 전후</td></tr>
+        <tr><td>LPDDR6</td><td class="num">~10.7–14.4 (2025 규격)</td><td>24비트 채널 (12비트 서브채널 ×2)</td><td class="num">≲0.5 V</td><td>BL24 · NRZ</td><td>2026년 양산·탑재 시작</td></tr>
         <tr><td>GDDR6</td><td class="num">14–20 (최대 ~24)</td><td>칩당 32비트 (16비트 채널 ×2)</td><td class="num">1.35 V</td><td>16n · POD, NRZ</td><td>256비트 @20: 640 GB/s</td></tr>
         <tr><td>GDDR6X</td><td class="num">19–24</td><td>칩당 32비트</td><td class="num">1.35 V</td><td>PAM4</td><td>384비트 @21: 1008 GB/s</td></tr>
         <tr><td>GDDR7</td><td class="num">28–32 (로드맵 ~40+)</td><td>칩당 32비트 (8비트 채널 ×4)</td><td class="num">1.2 V</td><td>PAM3</td><td>512비트 @28: 1792 GB/s</td></tr>
@@ -335,7 +349,7 @@
         <div class="stat"><span class="k">수신단 오버슈트</span><span class="v" id="rf-o-os">—</span></div>
         <div class="stat"><span class="k">정착 시간 (±5%)</span><span class="v" id="rf-o-ts">—</span></div>
       </div>
-      <div class="sim-note">1.2 V 스텝, 선 길이 약 7.5 cm(t_d = 0.5 ns). 초록 = 수신단(DRAM) 전압, 보라 = 드라이버 출력단 전압. 해볼 것: ① 기본값(ODT 끔, R_on 20 Ω)에서 수신단 전압이 2 V 가까이 튀고 여러 번 흔들린다 — 이 상태로는 UI 156 ps짜리 비트를 보낼 수 없다. ② 'ODT = Z₀'를 누르면 첫 도착에 바로 정착한다(대신 최종 전압이 분압되어 낮아진다). ③ ODT 끔 상태에서 R_on을 Z₀와 같게 하면 <em>소스 종단</em>이 된다: 수신단은 한 번에 정착하지만 드라이버 쪽은 2t_d 동안 절반 전압에 머문다.</div>
+      <div class="sim-note">1.2 V 스텝, 선 길이 약 7.5 cm(t_d = 0.5 ns). 초록 = 수신단(DRAM) 전압, 보라 = 드라이버 출력단 전압. 해볼 것: ① 기본값(ODT 끔, R_on 20 Ω)에서 수신단 전압이 1.6 V까지 튀고 여러 번 흔들린다 — 이 상태로는 UI 156 ps짜리 비트를 보낼 수 없다. ② 'ODT = Z₀'를 누르면 첫 도착에 바로 정착한다(대신 최종 전압이 분압되어 낮아진다). ③ ODT 끔 상태에서 R_on을 Z₀와 같게 하면 <em>소스 종단</em>이 된다: 수신단은 한 번에 정착하지만 드라이버 쪽은 2t_d 동안 절반 전압에 머문다.</div>
     </div>
 
     <h3>크로스토크, 동시 스위칭 노이즈</h3>

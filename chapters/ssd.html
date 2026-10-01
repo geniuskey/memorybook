@@ -5,6 +5,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>SSD와 플래시 컨트롤러 · MemoryBook</title>
 <meta name="description" content="SSD 내부 구조, 채널·웨이·플레인 병렬성, FTL 주소 매핑, 가비지 컬렉션과 쓰기 증폭, 웨어 레벨링과 TBW, SLC 캐시, NVMe·PCIe, ZNS·FDP까지 — NAND 칩을 '디스크'로 만드는 컨트롤러의 모든 것.">
+<link rel="canonical" href="https://memorybook.euiyun.com/chapters/ssd.html">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<meta name="theme-color" content="#0e9384">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="MemoryBook">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="SSD와 플래시 컨트롤러 · MemoryBook">
+<meta property="og:description" content="SSD 내부 구조, 채널·웨이·플레인 병렬성, FTL 주소 매핑, 가비지 컬렉션과 쓰기 증폭, 웨어 레벨링과 TBW, SLC 캐시, NVMe·PCIe, ZNS·FDP까지 — NAND 칩을 '디스크'로 만드는 컨트롤러의 모든 것.">
+<meta property="og:url" content="https://memorybook.euiyun.com/chapters/ssd.html">
+<meta property="og:image" content="https://memorybook.euiyun.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Chapter","LearningResource"],"@id":"https://memorybook.euiyun.com/chapters/ssd.html#chapter","name":"SSD와 플래시 컨트롤러","headline":"SSD와 플래시 컨트롤러 · MemoryBook","description":"SSD 내부 구조, 채널·웨이·플레인 병렬성, FTL 주소 매핑, 가비지 컬렉션과 쓰기 증폭, 웨어 레벨링과 TBW, SLC 캐시, NVMe·PCIe, ZNS·FDP까지 — NAND 칩을 '디스크'로 만드는 컨트롤러의 모든 것.","url":"https://memorybook.euiyun.com/chapters/ssd.html","position":10,"inLanguage":"ko","isAccessibleForFree":true,"learningResourceType":"인터랙티브 교재","educationalLevel":"공대 학부","image":"https://memorybook.euiyun.com/og.png","dateModified":"2026-10-01","isPartOf":{"@type":"Book","@id":"https://memorybook.euiyun.com/#book","name":"MemoryBook · 메모리 반도체 교과서","url":"https://memorybook.euiyun.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"MemoryBook","item":"https://memorybook.euiyun.com/"},{"@type":"ListItem","position":2,"name":"10. SSD와 플래시 컨트롤러","item":"https://memorybook.euiyun.com/chapters/ssd.html"}]}]}</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
@@ -348,7 +362,7 @@
       $$ M_{L2P} = \frac{C}{S_{map}} \times E \;\;\approx\;\; \frac{1\ \text{TB}}{4\ \text{KB}} \times 4\ \text{B} = 2.4\times 10^{8} \times 4\ \text{B} \approx 1\ \text{GB} $$
       <div class="where">여기서 \(C\)는 용량, \(S_{map}\)은 매핑 단위(보통 4 KB, 파일 시스템 블록 크기와 일치), \(E\)는 항목 크기. 32비트 항목은 \(2^{32}\)개 × 4 KB = 16 TB까지 가리킬 수 있어 그 이상은 항목이 더 커진다. 매핑 단위가 4 KB면 DRAM은 용량의 약 1/1000.</div>
     </div>
-    <p>그래서 30 TB급 데이터센터 SSD는 DRAM이 30 GB 이상 필요해진다. 2023~2025년 QLC 기반 60~120 TB급 제품이 나오면서 매핑 단위를 16 KB 이상으로 키워 DRAM을 1/4 이하로 줄이는 설계(Indirection Unit, IU 확대)가 널리 쓰이기 시작했다. 대신 4 KB 랜덤 쓰기가 들어오면 16 KB 단위를 읽고-고치고-다시 써야(read-modify-write) 하므로 쓰기 증폭이 커진다.</p>
+    <p>그래서 30 TB급 데이터센터 SSD는 DRAM이 30 GB 이상 필요해진다. 2023~2026년 QLC 기반 60~245 TB급 제품이 나오면서 매핑 단위를 16 KB 이상으로 키워 DRAM을 1/4 이하로 줄이는 설계(Indirection Unit, IU 확대)가 널리 쓰이기 시작했다. 대신 4 KB 랜덤 쓰기가 들어오면 16 KB 단위를 읽고-고치고-다시 써야(read-modify-write) 하므로 쓰기 증폭이 커진다.</p>
 
     <div class="sim" id="sim-map">
       <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>매핑 테이블 DRAM 요구량 계산기</h3></div>
@@ -425,7 +439,7 @@
       $$ \mathrm{WAF} \;=\; \frac{\text{NAND 쓰기량}}{\text{호스트 쓰기량}} \;=\; \frac{(1-u)P + uP}{(1-u)P} \;=\; \frac{1}{1-u} $$
       <div class="where">여기서 \(P\)는 블록당 페이지 수. 희생 블록이 비어 있을수록(\(u \to 0\)) WAF는 1에 가깝고, 꽉 찬 블록을 치우면(\(u \to 1\)) 폭발한다. 그림 10-5의 예는 \(u = 3/8\)이므로 WAF = 1.6.</div>
     </div>
-    <p>그렇다면 희생 블록의 \(u\)를 낮추려면? 전체 물리 공간 중 호스트가 쓸 수 있는 부분을 줄여 여유 공간을 늘리면 된다. 이것이 <span class="term">오버 프로비저닝</span><span class="en">(OP, Over-Provisioning)</span>이다. 1 TB(=1,000 GB) 제품에 1,024 GiB(≈1,100 GB)의 NAND를 넣으면 약 7%가 호스트에 보이지 않는 여유 공간이 된다. 데이터센터용 '혼합 사용' 제품은 3.84 TB 대신 3.2 TB로 팔아 OP를 28% 안팎으로 키운다.</p>
+    <p>그렇다면 희생 블록의 \(u\)를 낮추려면? 전체 물리 공간 중 호스트가 쓸 수 있는 부분을 줄여 여유 공간을 늘리면 된다. 이것이 <span class="term">오버 프로비저닝</span><span class="en">(OP, Over-Provisioning)</span>이다. 512 GB 제품에 512 GiB(≈550 GB)의 NAND를 넣으면 약 7%가 호스트에 보이지 않는 여유 공간이 된다. 데이터센터용 '혼합 사용' 제품은 3.84 TB 대신 3.2 TB로 팔아 OP를 28% 안팎으로 키운다.</p>
     <div class="formula">
       $$ \rho_{OP} = \frac{C_{phys} - C_{user}}{C_{user}}, \qquad \mathrm{WAF}_{greedy} \;\approx\; \frac{1 + \rho_{OP}}{2\rho_{OP}} \quad (\text{균일 랜덤 쓰기 근사}) $$
       <div class="where">균일 랜덤 쓰기와 greedy 정책에 대한 널리 쓰이는 근사식. \(\rho\) = 7%면 약 7.6, 28%면 약 2.3이다. 실제 값은 블록 크기, 열린 블록 수, 워크로드의 핫/콜드 편중에 따라 달라지며 아래 시뮬레이터로 직접 확인할 수 있다.</div>
@@ -499,7 +513,7 @@
         <tr><td>소비자 QLC</td><td class="num">2 TB</td><td class="num">~ 400–700 TBW</td><td class="num">≈ 0.1–0.2</td><td>읽기 위주 대용량</td></tr>
         <tr><td>데이터센터 읽기 집중형 (TLC)</td><td class="num">3.84 TB</td><td class="num">1 DWPD</td><td class="num">1</td><td>≈ 7 PBW, OP ~7%</td></tr>
         <tr><td>데이터센터 혼합 사용 (TLC)</td><td class="num">3.2 TB</td><td class="num">3 DWPD</td><td class="num">3</td><td>같은 NAND, OP ~28% → WAF↓</td></tr>
-        <tr><td>데이터센터 대용량 QLC (2024~)</td><td class="num">30~122 TB</td><td class="num">~0.3–0.6 DWPD</td><td class="num">0.3–0.6</td><td>순차 쓰기 위주, 16 KB+ IU</td></tr>
+        <tr><td>데이터센터 대용량 QLC (2024~)</td><td class="num">30~245 TB</td><td class="num">~0.3–0.6 DWPD</td><td class="num">0.3–0.6</td><td>순차 쓰기 위주, 16 KB+ IU</td></tr>
       </tbody>
     </table></div>
     <div class="sim" id="sim-end">
@@ -598,7 +612,7 @@
         <div class="stat"><span class="k">총 소요 시간</span><span class="v" id="slc-t">—</span></div>
         <div class="stat"><span class="k">평균 속도</span><span class="v" id="slc-avg">—</span></div>
       </div>
-      <div class="sim-note">교육용 모델: 동적 캐시 ≈ 빈 공간 ÷ (셀당 비트 수) × 0.75 + 정적 캐시(용량 TB당 약 12 GB), 캐시 안 속도 ≈ 6.5 GB/s(Gen4), 캐시 밖은 다이 수에 비례(실제 값은 제품마다 크게 다르다). 쓰기량은 빈 공간보다 클 수 없다. 해볼 것: ① 2 TB TLC에서 사용률 20% → 85%로 올리며 절벽 위치를 보자. ② QLC로 바꾸면 절벽 뒤 속도가 얼마나 떨어지는가? ③ 정적 캐시만 쓰는 설계는 어떤 사용자에게 유리할까(찬 드라이브에서도 일정한 성능).</div>
+      <div class="sim-note">교육용 모델: '동적 + 정적' 캐시 ≈ 빈 공간 ÷ (셀당 비트 수) × 0.75 + 정적 캐시(용량 TB당 약 6 GB), '정적만'은 용량 TB당 약 24 GB, 캐시 안 속도 ≈ 6.5 GB/s(Gen4), 캐시 밖은 다이 수에 비례(실제 값은 제품마다 크게 다르다). 쓰기량은 빈 공간보다 클 수 없다. 해볼 것: ① 2 TB TLC에서 사용률 20% → 85%로 올리며 절벽 위치를 보자. ② QLC로 바꾸면 절벽 뒤 속도가 얼마나 떨어지는가? ③ 정적 캐시만 쓰는 설계는 어떤 사용자에게 유리할까(찬 드라이브에서도 일정한 성능).</div>
     </div>
 
     <h3>TRIM: 지운 파일을 SSD에 알려 주기</h3>
@@ -678,7 +692,7 @@
         <tr><td>Gen3</td><td class="num">8 GT/s</td><td>128b/130b NRZ</td><td class="num">≈ 3.9 GB/s</td><td class="num">~3.5 GB/s</td><td>2015~</td></tr>
         <tr><td>Gen4</td><td class="num">16 GT/s</td><td>128b/130b NRZ</td><td class="num">≈ 7.9 GB/s</td><td class="num">~7.0–7.4 GB/s</td><td>2019~</td></tr>
         <tr><td>Gen5</td><td class="num">32 GT/s</td><td>128b/130b NRZ</td><td class="num">≈ 15.8 GB/s</td><td class="num">~12–14.5 GB/s</td><td>2023~</td></tr>
-        <tr><td>Gen6</td><td class="num">64 GT/s</td><td>PAM4 + FLIT (FEC)</td><td class="num">≈ 30 GB/s</td><td class="num">~26–28 GB/s (샘플)</td><td>2026년 전후 초기</td></tr>
+        <tr><td>Gen6</td><td class="num">64 GT/s</td><td>PAM4 + FLIT (FEC)</td><td class="num">≈ 30 GB/s</td><td class="num">~28 GB/s (데이터센터용)</td><td>2026~ (데이터센터용부터)</td></tr>
       </tbody>
     </table></div>
     <p>PCIe 6.0은 6장에서 본 PAM4 신호를 도입해 레인당 64 GT/s를 얻고, 오류율 증가를 FEC와 고정 크기 FLIT 패킷으로 감당한다. 참고로 SATA 3의 한계는 600 MB/s(실효 ~550 MB/s)다.</p>
@@ -703,7 +717,7 @@
         <div class="stat"><span class="k">바쁜 다이 (평균)</span><span class="v" id="qd-busy">—</span></div>
         <div class="stat"><span class="k">병목</span><span class="v" id="qd-bn">—</span></div>
       </div>
-      <div class="sim-note">모델: QD개의 요청이 D개 다이에 무작위로 흩어지면 평균 D(1−(1−1/D)<sup>QD</sup>)개 다이가 바쁘다. IOPS = min(바쁜 다이/t<sub>R</sub>, QD/(t<sub>R</sub>+오버헤드), 컨트롤러 한계 ~2 M, 링크/4 KB), 지연 = QD/IOPS. 해볼 것: ① QD 1의 IOPS가 1/(t<sub>R</sub>+오버헤드)와 같은지 확인. ② 다이 32개에서 QD를 올리면 어디서 포화되는가? 그 뒤 지연은 QD에 비례해 늘어난다. ③ t<sub>R</sub>를 3~10 µs(저지연 SLC급 NAND)로 낮추면 병목이 컨트롤러/링크로 옮겨 간다.</div>
+      <div class="sim-note">모델: QD개의 요청이 D개 다이에 무작위로 흩어지면 평균 D(1−(1−1/D)<sup>QD</sup>)개 다이가 바쁘다. IOPS = min(바쁜 다이/t<sub>R</sub>, QD/(t<sub>R</sub>+오버헤드), 컨트롤러 한계 ~2.5 M, 링크/4 KB), 지연 = QD/IOPS. 해볼 것: ① QD 1의 IOPS가 1/(t<sub>R</sub>+오버헤드)와 같은지 확인. ② 다이 32개에서 QD를 올리면 어디서 포화되는가? 그 뒤 지연은 QD에 비례해 늘어난다. ③ t<sub>R</sub>를 3~10 µs(저지연 SLC급 NAND)로 낮추면 병목이 컨트롤러/링크로 옮겨 간다.</div>
     </div>
   </section>
 

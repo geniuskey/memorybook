@@ -4,7 +4,21 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>용어집 &amp; 종합 퀴즈 · MemoryBook</title>
-<meta name="description" content="메모리 반도체 핵심 용어 160여 개를 한국어·영어·약어로 검색하고, 전 챕터를 아우르는 20문항 종합 퀴즈로 실력을 점검한다.">
+<meta name="description" content="메모리 반도체 핵심 용어 200여 개를 한국어·영어·약어로 검색하고, 전 챕터를 아우르는 20문항 종합 퀴즈로 실력을 점검한다.">
+<link rel="canonical" href="https://memorybook.euiyun.com/chapters/glossary.html">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<meta name="theme-color" content="#0e9384">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="MemoryBook">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="용어집 &amp; 종합 퀴즈 · MemoryBook">
+<meta property="og:description" content="메모리 반도체 핵심 용어 200여 개를 한국어·영어·약어로 검색하고, 전 챕터를 아우르는 20문항 종합 퀴즈로 실력을 점검한다.">
+<meta property="og:url" content="https://memorybook.euiyun.com/chapters/glossary.html">
+<meta property="og:image" content="https://memorybook.euiyun.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Chapter","LearningResource"],"@id":"https://memorybook.euiyun.com/chapters/glossary.html#chapter","name":"용어집 & 종합 퀴즈","headline":"용어집 & 종합 퀴즈 · MemoryBook","description":"메모리 반도체 핵심 용어 200여 개를 한국어·영어·약어로 검색하고, 전 챕터를 아우르는 20문항 종합 퀴즈로 실력을 점검한다.","url":"https://memorybook.euiyun.com/chapters/glossary.html","position":17,"inLanguage":"ko","isAccessibleForFree":true,"learningResourceType":"용어집, 퀴즈","educationalLevel":"공대 학부","image":"https://memorybook.euiyun.com/og.png","dateModified":"2026-10-01","isPartOf":{"@type":"Book","@id":"https://memorybook.euiyun.com/#book","name":"MemoryBook · 메모리 반도체 교과서","url":"https://memorybook.euiyun.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"MemoryBook","item":"https://memorybook.euiyun.com/"},{"@type":"ListItem","position":2,"name":"17. 용어집 & 종합 퀴즈","item":"https://memorybook.euiyun.com/chapters/glossary.html"}]}]}</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
@@ -57,12 +71,12 @@
 <body data-chapter="glossary">
 <main class="chapter">
   <header class="chapter-hero">
-    <div class="eyebrow">Chapter 14</div>
+    <div class="eyebrow">Chapter 17</div>
     <h1>용어집 &amp; 종합 퀴즈</h1>
     <p class="lead">메모리 반도체는 약어의 숲이다. AMAT, SNM, BCAT, tRCD, tFAW, ODT, TSV, MR-MUF, ISPP, CuA, WAF, PRAC, LDPC, MTJ, CXL… 이 장은 책 전체에 흩어진 핵심 용어를 한곳에 모은 사전이자, 전 범위를 점검하는 마무리 시험이다.</p>
     <ul class="objectives">
       <li>한국어·영어·약어 어느 쪽으로든 용어를 찾아 정의와 해당 챕터로 바로 이동할 수 있다.</li>
-      <li>메모리 계층과 소자 물리에서 SRAM·DRAM·NAND, 시스템 설계까지 각 장의 핵심 개념을 스스로 점검한다.</li>
+      <li>메모리 계층과 소자 물리에서 SRAM·DRAM·NAND, 시스템 설계, 공정·테스트·산업까지 각 장의 핵심 개념을 스스로 점검한다.</li>
       <li>틀린 문제의 챕터를 확인하고 약한 부분을 다시 공부할 계획을 세운다.</li>
     </ul>
     <p style="margin-top:16px"><a href="#glossary">→ 용어집 바로 가기</a> · <a href="#final-quiz">→ 종합 퀴즈 바로 풀기</a></p>
@@ -90,6 +104,9 @@
           <button data-value="reliability">11 신뢰성</button>
           <button data-value="emerging">12 차세대</button>
           <button data-value="design">13 설계</button>
+          <button data-value="process">14 공정</button>
+          <button data-value="test">15 테스트</button>
+          <button data-value="industry">16 산업</button>
         </div>
       </div>
       <div class="row">
@@ -183,7 +200,7 @@
     // 04 DRAM 셀과 어레이
     { ko: "DRAM", en: "Dynamic random-access memory", abbr: "DRAM", def: "커패시터의 전하 유무로 비트를 저장하는 메모리. 전하가 새므로 주기적인 리프레시가 필요해 '동적'이라 부른다.", ch: "dram-cell" },
     { ko: "1T1C 셀", en: "One-transistor one-capacitor cell", abbr: "1T1C", def: "접근 트랜지스터 1개와 스토리지 커패시터 1개로 된 DRAM 셀. 셀 커패시턴스는 보통 약 10~20 fF 수준이다.", ch: "dram-cell" },
-    { ko: "전하 공유", en: "Charge sharing", abbr: "", def: "워드라인이 열리면 셀 커패시터와 VDD/2로 프리차지된 비트라인이 전하를 나눠 갖는 과정. ΔV = (VDD/2)·Cs/(Cs+Cbl)로 보통 100~200 mV 정도의 신호가 생긴다.", ch: "dram-cell" },
+    { ko: "전하 공유", en: "Charge sharing", abbr: "", def: "워드라인이 열리면 셀 커패시터와 VDD/2로 프리차지된 비트라인이 전하를 나눠 갖는 과정. ΔV = (VDD/2)·Cs/(Cs+Cbl)로 보통 수십~100 mV 정도의 신호가 생긴다.", ch: "dram-cell" },
     { ko: "비트라인", en: "Bitline", abbr: "BL", def: "셀의 데이터를 센스 앰프로 전달하는 세로 배선. 기생 커패시턴스(약 60~120 fF)가 셀보다 커서 전하 공유 신호를 작게 만든다.", ch: "dram-cell" },
     { ko: "워드라인", en: "Wordline", abbr: "WL", def: "한 로우의 접근 트랜지스터 게이트를 묶은 가로 배선. DRAM은 셀 누설을 줄이려 VPP(약 2.5~3 V 이상)로 승압해 구동한다.", ch: "dram-cell" },
     { ko: "오픈 비트라인", en: "Open bitline", abbr: "", def: "센스 앰프 양쪽 매트의 비트라인을 한 쌍으로 쓰는 구조. 모든 교차점에 셀을 둘 수 있어 6F² 셀이 가능하지만 잡음 상쇄가 약하다.", ch: "dram-cell" },
@@ -264,7 +281,7 @@
     { ko: "프로그램 디스터브", en: "Program disturb", abbr: "", def: "선택 셀을 프로그램할 때 같은 워드라인·스트링의 비선택 셀이 약하게 프로그램되는 현상. 셀프 부스팅으로 비선택 채널 전위를 올려 막는다.", ch: "nand" },
 
     // 09 3D NAND
-    { ko: "3D NAND", en: "3D NAND / V-NAND", abbr: "V-NAND", def: "워드라인 층을 수직으로 쌓고 그 사이를 관통하는 수직 채널에 셀 스트링을 만든 NAND. 2024~2025년 약 200~300단대 제품이 양산된다.", ch: "vnand" },
+    { ko: "3D NAND", en: "3D NAND / V-NAND", abbr: "V-NAND", def: "워드라인 층을 수직으로 쌓고 그 사이를 관통하는 수직 채널에 셀 스트링을 만든 NAND. 2026년 기준 약 200~400단대 제품이 양산된다.", ch: "vnand" },
     { ko: "채널 홀", en: "Channel hole", abbr: "", def: "적층막 전체를 한 번에 뚫는 원통형 구멍. 벽면에 블로킹 산화막·질화막·터널 산화막·폴리실리콘 채널을 차례로 입힌다. 종횡비가 수십:1에 달한다.", ch: "vnand" },
     { ko: "게이트 대체 공정", en: "Gate replacement", abbr: "", def: "산화막/질화막을 번갈아 쌓아 식각한 뒤, 슬릿으로 질화막을 제거하고 그 자리를 텅스텐 워드라인으로 채우는 공정.", ch: "vnand" },
     { ko: "계단 구조", en: "Staircase", abbr: "", def: "적층된 각 워드라인 층에 콘택을 내리기 위해 가장자리를 계단 모양으로 깎은 영역. 층 수가 늘수록 면적과 공정 부담이 커진다.", ch: "vnand" },
@@ -323,7 +340,7 @@
     { ko: "강유전체 메모리", en: "Ferroelectric RAM", abbr: "FeRAM", def: "강유전체 커패시터의 분극 방향으로 비트를 저장하는 메모리. 읽기가 파괴적이라 다시 써야 하며, HfO₂ 기반 강유전체 발견으로 CMOS 호환성이 좋아졌다.", ch: "emerging" },
     { ko: "강유전체 트랜지스터", en: "Ferroelectric FET", abbr: "FeFET", def: "게이트 절연막을 강유전체로 바꿔 분극으로 Vt를 옮기는 1T 메모리. 비파괴 읽기가 가능하고 인메모리 연산 후보로도 연구된다.", ch: "emerging" },
     { ko: "스토리지 클래스 메모리", en: "Storage-class memory", abbr: "SCM", def: "DRAM과 NAND 사이의 지연·가격을 노린 비휘발 메모리 계층. 3D XPoint(Optane)가 대표였으나 2022년 사업이 종료되었다.", ch: "emerging" },
-    { ko: "컴퓨트 익스프레스 링크", en: "Compute Express Link", abbr: "CXL", def: "PCIe 물리층 위에서 캐시 일관성 있는 메모리 접근을 제공하는 인터커넥트. CXL.mem으로 메모리 확장·풀링을 하며 로컬 DRAM보다 약 100 ns 정도 지연이 추가된다.", ch: "emerging" },
+    { ko: "컴퓨트 익스프레스 링크", en: "Compute Express Link", abbr: "CXL", def: "PCIe 물리층 위에서 캐시 일관성 있는 메모리 접근을 제공하는 인터커넥트. CXL.mem으로 메모리 확장·풀링을 하며 로컬 DRAM보다 약 70~100 ns 정도 지연이 추가된다.", ch: "emerging" },
     { ko: "프로세싱 인 메모리", en: "Processing-in-memory", abbr: "PIM", def: "메모리 칩(또는 뱅크) 안에 연산기를 넣어 데이터를 밖으로 옮기지 않고 처리하는 구조. 내부 뱅크 대역폭을 활용해 메모리 바운드 연산의 에너지를 줄인다.", ch: "emerging" },
     { ko: "프로세싱 니어 메모리", en: "Processing-near-memory", abbr: "PNM", def: "메모리 다이 밖의 가까운 곳(모듈 버퍼 칩, CXL 컨트롤러, HBM 베이스 다이)에 연산기를 두는 구조. 로직 공정을 쓸 수 있지만 대역폭 이득은 PIM보다 작다.", ch: "emerging" },
     { ko: "컴퓨팅 인 메모리", en: "Computing-in-memory", abbr: "CIM", def: "셀 어레이 자체의 물리(저항 전류의 합, 비트라인 전하 공유)로 연산하는 구조. 멤리스터 크로스바의 아날로그 행렬-벡터 곱과 SRAM-CIM이 대표적이다.", ch: "emerging" },
@@ -338,6 +355,45 @@
     { ko: "비트당 에너지", en: "Energy per bit", abbr: "pJ/bit", def: "1비트를 옮기는 데 드는 에너지. HBM 약 3~5 pJ/bit, DDR5 약 10~20 pJ/bit 수준이며, 대역폭 × pJ/bit가 곧 메모리 I/O 전력이다.", ch: "design" },
     { ko: "대역폭 대 용량 비", en: "Bandwidth-to-capacity ratio", abbr: "", def: "GB당 제공되는 GB/s. HBM은 크고 LPDDR·DDR은 작아, 모델 크기와 요구 토큰 속도에 맞는 메모리 조합을 고를 때 쓰는 지표다.", ch: "design" },
     { ko: "총 소유 비용", en: "Total cost of ownership", abbr: "TCO", def: "구매 비용뿐 아니라 전력·냉각·공간·운영 비용까지 합한 시스템 비용. 메모리 선택은 $/GB·$/(GB/s)·W를 함께 따져야 한다.", ch: "design" },
+    // 14 공정
+    { ko: "노광", en: "Lithography", abbr: "", def: "마스크의 회로 패턴을 빛으로 감광막에 옮기는 공정. 찍을 수 있는 최소 선폭이 미세화의 한계를 정한다.", ch: "process" },
+    { ko: "레일리 식", en: "Rayleigh criterion", abbr: "", def: "최소 하프 피치 = k1 × λ / NA. 파장을 줄이거나 개구수를 키우거나 k1을 낮춰야 더 가는 선을 찍을 수 있다.", ch: "process" },
+    { ko: "극자외선 노광", en: "Extreme ultraviolet lithography", abbr: "EUV", def: "파장 13.5 nm의 빛을 반사 광학계로 쓰는 노광. DRAM은 1z~1a 노드부터 일부 층에 도입해 세대마다 적용 층을 늘리고 있다.", ch: "process" },
+    { ko: "초점 심도", en: "Depth of focus", abbr: "DOF", def: "상이 선명하게 맺히는 높이 범위. λ / NA²에 비례하므로 NA를 키우면 해상도는 좋아지지만 초점 여유는 줄어든다.", ch: "process" },
+    { ko: "멀티 패터닝", en: "Multi-patterning", abbr: "SADP / SAQP", def: "한 번의 노광으로 찍을 수 없는 피치를 스페이서 증착과 식각을 반복해 2배, 4배로 쪼개는 기법. 공정 단계와 비용이 늘어난다.", ch: "process" },
+    { ko: "플라즈마 식각", en: "Plasma etch", abbr: "", def: "이온과 라디칼로 막을 깎아 내는 건식 식각. 이온이 수직으로 입사하므로 옆으로 번지지 않고 깊게 팔 수 있다.", ch: "process" },
+    { ko: "식각 선택비", en: "Etch selectivity", abbr: "", def: "깎으려는 막과 마스크(또는 아래 막)의 식각 속도 비. 선택비가 낮으면 깊은 구멍을 파기 전에 마스크가 먼저 닳는다.", ch: "process" },
+    { ko: "종횡비 의존 식각", en: "Aspect ratio dependent etching", abbr: "ARDE", def: "구멍이 깊어질수록 이온과 반응 기체가 바닥까지 닿기 어려워져 식각 속도가 느려지는 현상.", ch: "process" },
+    { ko: "화학 기상 증착", en: "Chemical vapor deposition", abbr: "CVD", def: "기체 원료를 웨이퍼 표면에서 반응시켜 막을 쌓는 공정. 빠르지만 깊은 구조에서는 입구가 먼저 두꺼워진다.", ch: "process" },
+    { ko: "원자층 증착", en: "Atomic layer deposition", abbr: "ALD", def: "전구체와 반응 기체를 번갈아 넣어 한 사이클에 원자층 하나 정도씩 쌓는 공정. 자기 제한 반응이라 고종횡비 구조도 균일하게 덮는다.", ch: "process" },
+    { ko: "단차 피복성", en: "Step coverage", abbr: "", def: "구조 바닥(또는 측벽)의 막 두께 ÷ 윗면의 막 두께. 100%에 가까울수록 컨포멀하다.", ch: "process" },
+    { ko: "화학적 기계적 연마", en: "Chemical mechanical polishing", abbr: "CMP", def: "슬러리와 패드로 웨이퍼 표면을 갈아 평탄하게 만드는 공정. 다층 배선과 웨이퍼 본딩의 전제 조건이다.", ch: "process" },
+    // 15 테스트
+    { ko: "웨이퍼 테스트", en: "Wafer test / Electrical die sorting", abbr: "EDS", def: "패키징 전에 프로브 카드로 웨이퍼 위의 다이를 전기적으로 검사해 양품을 고르고 리페어할 주소를 찾는 단계.", ch: "test" },
+    { ko: "고장 모델", en: "Fault model", abbr: "", def: "물리적 결함이 논리 동작에 나타나는 방식을 추상화한 것. 고착, 천이, 결합, 주소 디코더 고장 등이 있다.", ch: "test" },
+    { ko: "고착 고장", en: "Stuck-at fault", abbr: "SAF", def: "셀 값이 0 또는 1에 고정되어 쓰기로 바뀌지 않는 고장.", ch: "test" },
+    { ko: "결합 고장", en: "Coupling fault", abbr: "CF", def: "한 셀의 쓰기나 상태가 다른 셀의 값을 바꾸는 고장. 반전·멱등·상태 결합으로 나눈다.", ch: "test" },
+    { ko: "마치 테스트", en: "March test", abbr: "", def: "모든 주소를 오름차순 또는 내림차순으로 지나가며 읽기·쓰기 묶음을 적용하는 테스트. March C-는 10n번의 동작으로 고착·천이·결합·주소 고장을 검출한다.", ch: "test" },
+    { ko: "내장 자체 테스트", en: "Built-in self-test", abbr: "BIST / MBIST", def: "칩 안에 패턴 발생기와 비교기를 넣어 스스로 메모리를 검사하는 회로. 외부 테스트 장비 의존도와 테스트 시간을 줄인다.", ch: "test" },
+    { ko: "리던던시", en: "Redundancy", abbr: "", def: "불량 셀을 대체하려고 미리 넣어 둔 여분의 행과 열. 퓨즈에 불량 주소를 기록해 여분으로 돌린다.", ch: "test" },
+    { ko: "패키지 후 리페어", en: "Post-package repair", abbr: "PPR", def: "패키징 이후, 심지어 시스템에 장착된 뒤에도 불량 행을 여분 행으로 바꾸는 기능. DDR4부터 표준에 포함되었다.", ch: "test" },
+    { ko: "수율", en: "Yield", abbr: "", def: "웨이퍼 위 전체 다이 중 양품의 비율. 다이 면적과 결함 밀도가 클수록 떨어진다.", ch: "test" },
+    { ko: "결함 밀도", en: "Defect density", abbr: "D0", def: "단위 면적당 치명 결함 수. 푸아송 모델에서 수율 = exp(−A × D0)이다.", ch: "test" },
+    { ko: "번인", en: "Burn-in", abbr: "", def: "고온·고전압으로 칩을 가속 구동해 초기 불량을 출하 전에 걸러 내는 공정.", ch: "test" },
+    { ko: "배스터브 곡선", en: "Bathtub curve", abbr: "", def: "시간에 따른 고장률 곡선. 초기 불량 구간에서 떨어지고, 우발 고장 구간에서 평평하다가, 마모 구간에서 다시 오른다.", ch: "test" },
+    { ko: "백만 개당 불량 수", en: "Defective parts per million", abbr: "DPPM", def: "출하한 부품 백만 개 중 불량품의 수. 출하 품질의 지표다.", ch: "test" },
+    // 16 산업
+    { ko: "범용품", en: "Commodity", abbr: "", def: "제조사가 달라도 서로 바꿔 쓸 수 있는 표준 제품. 메모리는 JEDEC 표준 덕분에 범용품이 되었고 가격이 수급으로 정해진다.", ch: "industry" },
+    { ko: "종합 반도체 회사", en: "Integrated device manufacturer", abbr: "IDM", def: "설계부터 제조, 패키징, 판매까지 직접 하는 회사. 주요 메모리 회사는 모두 이 형태다.", ch: "industry" },
+    { ko: "고정거래가격", en: "Contract price", abbr: "", def: "제조사와 대형 고객이 일정 기간 단위로 협상해 정하는 가격. 현물가격보다 느리게 움직인다.", ch: "industry" },
+    { ko: "현물가격", en: "Spot price", abbr: "", def: "유통 시장에서 그때그때 거래되는 가격. 수급 변화를 먼저 반영해 고정거래가격의 선행 지표로 쓰인다.", ch: "industry" },
+    { ko: "비트당 원가", en: "Cost per bit", abbr: "", def: "웨이퍼 원가 ÷ (웨이퍼당 다이 수 × 수율 × 다이당 비트 수). 미세화, 적층 수, 셀당 비트 수가 이 값을 낮춘다.", ch: "industry" },
+    { ko: "비트 그로스", en: "Bit growth", abbr: "", def: "한 해 동안 공급(또는 수요) 비트 총량이 늘어난 비율. 웨이퍼 투입 증가와 다이당 비트 증가의 합으로 결정된다.", ch: "industry" },
+    { ko: "라이트의 법칙", en: "Wright's law", abbr: "", def: "누적 생산량이 두 배가 될 때마다 단위 원가가 일정 비율로 떨어진다는 학습 곡선 법칙.", ch: "industry" },
+    { ko: "감가상각", en: "Depreciation", abbr: "", def: "팹과 장비 투자비를 사용 기간에 걸쳐 나누어 비용으로 잡는 것. 메모리 원가에서 비중이 큰 고정비다.", ch: "industry" },
+    { ko: "메모리 사이클", en: "Memory cycle", abbr: "", def: "증설에 걸리는 시간 지연 때문에 공급 과잉과 부족이 번갈아 나타나며 가격과 이익이 크게 오르내리는 현상.", ch: "industry" },
+    { ko: "채찍 효과", en: "Bullwhip effect", abbr: "", def: "최종 수요의 작은 변화가 공급망을 거슬러 올라가며 재고 조정으로 증폭되는 현상.", ch: "industry" },
+    { ko: "트레이드 비율", en: "Trade ratio", abbr: "", def: "같은 비트를 만드는 데 HBM이 범용 DRAM보다 웨이퍼를 몇 배 더 쓰는지 나타내는 비율. 약 3배 수준으로 알려져 있다.", ch: "industry" },
   ];
 
   /* =============================================================== 용어집 렌더 */
@@ -505,7 +561,7 @@
     fq.results.forEach(function (r) { (m[r.ch] = m[r.ch] || { n: 0, ok: 0 }); m[r.ch].n++; if (r.ok) m[r.ch].ok++; });
     return MB.CHAPTERS.filter(function (c) { return m[c.slug]; }).map(function (c) { return { c: c, n: m[c.slug].n, ok: m[c.slug].ok }; });
   }
-  var SHORT = { hierarchy: "메모리 계층", device: "소자 물리", sram: "SRAM·캐시", "dram-cell": "DRAM 셀", "dram-ops": "DRAM 동작", interface: "인터페이스", hbm: "HBM·적층", nand: "NAND 셀", vnand: "3D NAND", ssd: "SSD", reliability: "신뢰성·ECC", emerging: "차세대·PIM", design: "시스템 설계" };
+  var SHORT = { hierarchy: "메모리 계층", device: "소자 물리", sram: "SRAM·캐시", "dram-cell": "DRAM 셀", "dram-ops": "DRAM 동작", interface: "인터페이스", hbm: "HBM·적층", nand: "NAND 셀", vnand: "3D NAND", ssd: "SSD", reliability: "신뢰성·ECC", emerging: "차세대·PIM", design: "시스템 설계", process: "제조 공정", test: "테스트·수율", industry: "산업·시장" };
   function drawResult(ctx, w, h) {
     var P = MB.palette(), rows = perChapter();
     var left = Math.min(150, Math.max(92, w * 0.32)), right = 46, top = 12, rh = (h - top - 8) / Math.max(1, rows.length);

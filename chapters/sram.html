@@ -5,6 +5,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>SRAM과 캐시 · MemoryBook</title>
 <meta name="description" content="6T SRAM 셀의 쌍안정 래치, 읽기·쓰기 동작과 셀 비, 버터플라이 곡선과 SNM, 센스 앰프, 어레이 구성과 스케일링 둔화, 8T 셀과 Vmin, 그리고 캐시 구조까지.">
+<link rel="canonical" href="https://memorybook.euiyun.com/chapters/sram.html">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<meta name="theme-color" content="#0e9384">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="MemoryBook">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="SRAM과 캐시 · MemoryBook">
+<meta property="og:description" content="6T SRAM 셀의 쌍안정 래치, 읽기·쓰기 동작과 셀 비, 버터플라이 곡선과 SNM, 센스 앰프, 어레이 구성과 스케일링 둔화, 8T 셀과 Vmin, 그리고 캐시 구조까지.">
+<meta property="og:url" content="https://memorybook.euiyun.com/chapters/sram.html">
+<meta property="og:image" content="https://memorybook.euiyun.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Chapter","LearningResource"],"@id":"https://memorybook.euiyun.com/chapters/sram.html#chapter","name":"SRAM과 캐시","headline":"SRAM과 캐시 · MemoryBook","description":"6T SRAM 셀의 쌍안정 래치, 읽기·쓰기 동작과 셀 비, 버터플라이 곡선과 SNM, 센스 앰프, 어레이 구성과 스케일링 둔화, 8T 셀과 Vmin, 그리고 캐시 구조까지.","url":"https://memorybook.euiyun.com/chapters/sram.html","position":3,"inLanguage":"ko","isAccessibleForFree":true,"learningResourceType":"인터랙티브 교재","educationalLevel":"공대 학부","image":"https://memorybook.euiyun.com/og.png","dateModified":"2026-10-01","isPartOf":{"@type":"Book","@id":"https://memorybook.euiyun.com/#book","name":"MemoryBook · 메모리 반도체 교과서","url":"https://memorybook.euiyun.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"MemoryBook","item":"https://memorybook.euiyun.com/"},{"@type":"ListItem","position":2,"name":"03. SRAM과 캐시","item":"https://memorybook.euiyun.com/chapters/sram.html"}]}]}</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
@@ -44,12 +58,12 @@
   <section id="why">
     <h2>왜 SRAM인가: 빠르지만 비싼 메모리</h2>
     <p><a href="hierarchy.html">1장</a>에서 본 메모리 계층의 맨 위, 프로세서 코어 바로 옆에는 <span class="term">SRAM</span><span class="en">(Static Random-Access Memory)</span>이 있다. '정적(static)'이라는 이름은 전원이 켜져 있는 한 <strong>리프레시 없이</strong> 데이터를 유지한다는 뜻이다. <a href="dram-cell.html">4장</a>의 DRAM이 커패시터에 담긴 전하를 저장하고 그 전하가 새어 나가기 전에 주기적으로 다시 써 줘야 하는 것과 대조적이다. SRAM은 전하를 '담아 두는' 대신, 두 인버터가 서로의 출력을 끊임없이 되먹이며 논리값을 '붙잡아' 둔다.</p>
-    <p>그 대가로 셀 하나에 트랜지스터가 6개 필요하다. DRAM 셀(트랜지스터 1개 + 커패시터 1개)보다 면적이 수십 배 크다. 대신 로직과 <strong>같은 공정</strong>으로 만들 수 있어 CPU·GPU 다이 안에 그대로 넣을 수 있고, 셀이 비트라인을 능동적으로 구동하므로 읽기가 빠르며(수백 ps~수 ns), 읽어도 데이터가 파괴되지 않는다.</p>
+    <p>그 대가로 셀 하나에 트랜지스터가 6개 필요하다. DRAM 셀(트랜지스터 1개 + 커패시터 1개)보다 면적이 10배 이상 크다. 대신 로직과 <strong>같은 공정</strong>으로 만들 수 있어 CPU·GPU 다이 안에 그대로 넣을 수 있고, 셀이 비트라인을 능동적으로 구동하므로 읽기가 빠르며(수백 ps~수 ns), 읽어도 데이터가 파괴되지 않는다.</p>
     <div class="table-wrap"><table>
       <thead><tr><th>항목</th><th>SRAM (6T)</th><th>DRAM (1T1C)</th></tr></thead>
       <tbody>
         <tr><td>저장 원리</td><td>교차 결합 인버터(래치)</td><td>커패시터 전하</td></tr>
-        <tr><td>셀 면적 (최신 공정)</td><td>약 0.02 µm² (≈ 300 F² 이상)</td><td>약 0.0017~0.002 µm² (6 F² 수준, 2024년 1b급)</td></tr>
+        <tr><td>셀 면적 (최신 공정)</td><td>약 0.02 µm² (≈ 100 F² 이상)</td><td>약 0.0012~0.0013 µm² (6 F² 수준, 2024년 1b급)</td></tr>
         <tr><td>리프레시</td><td>불필요</td><td>필요 (64 ms / 32 ms)</td></tr>
         <tr><td>읽기</td><td>비파괴, 셀이 BL을 방전</td><td>파괴적 전하 공유 → 재기록</td></tr>
         <tr><td>공정</td><td>로직 공정과 동일 (임베디드)</td><td>전용 공정 (별도 칩)</td></tr>
@@ -189,7 +203,7 @@
       <li><strong>PD (Pull-Down, NMOS)</strong>: '0'인 노드를 접지로 붙잡는다. 읽기 때 비트라인 방전 전류가 이 트랜지스터를 통해 흐르므로 가장 강하게 만든다.</li>
       <li><strong>PG (Pass-Gate, NMOS)</strong>: 셀과 바깥 세계를 잇는 문. 읽기 때는 약해야 하고(노드를 흔들지 않게), 쓰기 때는 강해야 한다(노드를 뒤집을 수 있게). 이 모순이 SRAM 설계의 핵심 긴장이다.</li>
     </ul>
-    <p>WL이 꺼져 있는 <span class="term">홀드</span><span class="en">(hold)</span> 상태에서 셀은 바깥과 차단된 채 래치로 값을 유지한다. 이때 흐르는 전류는 트랜지스터의 서브문턱 누설뿐이다(<a href="device.html">2장</a>). 셀당 수 pA~수십 pA라도 수억 개가 모이면 L3 캐시 하나의 대기 전력이 수백 mW에 이를 수 있어, 저전력 칩은 대기 중에 SRAM 전원을 낮추는(retention voltage) 기법을 쓴다.</p>
+    <p>WL이 꺼져 있는 <span class="term">홀드</span><span class="en">(hold)</span> 상태에서 셀은 바깥과 차단된 채 래치로 값을 유지한다. 이때 흐르는 전류는 트랜지스터의 서브문턱 누설뿐이다(<a href="device.html">2장</a>). 셀당 수 pA~수십 pA라도 수억 개가 모이면 L3 캐시 하나의 대기 전력이 수십 mW에 이를 수 있어, 저전력 칩은 대기 중에 SRAM 전원을 낮추는(retention voltage) 기법을 쓴다.</p>
   </section>
 
   <!-- ============================================================ 3 -->

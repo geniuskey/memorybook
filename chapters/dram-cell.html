@@ -5,6 +5,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>DRAM 셀과 어레이 · MemoryBook</title>
 <meta name="description" content="1T1C 셀과 전하 공유, 비트라인 센스 앰프, 오픈/폴디드 어레이, 매립 워드라인과 실린더 커패시터의 3D 구조, 그리고 4F²·3D DRAM으로 가는 스케일링을 시뮬레이터로 익힌다.">
+<link rel="canonical" href="https://memorybook.euiyun.com/chapters/dram-cell.html">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<meta name="theme-color" content="#0e9384">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="MemoryBook">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="DRAM 셀과 어레이 · MemoryBook">
+<meta property="og:description" content="1T1C 셀과 전하 공유, 비트라인 센스 앰프, 오픈/폴디드 어레이, 매립 워드라인과 실린더 커패시터의 3D 구조, 그리고 4F²·3D DRAM으로 가는 스케일링을 시뮬레이터로 익힌다.">
+<meta property="og:url" content="https://memorybook.euiyun.com/chapters/dram-cell.html">
+<meta property="og:image" content="https://memorybook.euiyun.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Chapter","LearningResource"],"@id":"https://memorybook.euiyun.com/chapters/dram-cell.html#chapter","name":"DRAM 셀과 어레이","headline":"DRAM 셀과 어레이 · MemoryBook","description":"1T1C 셀과 전하 공유, 비트라인 센스 앰프, 오픈/폴디드 어레이, 매립 워드라인과 실린더 커패시터의 3D 구조, 그리고 4F²·3D DRAM으로 가는 스케일링을 시뮬레이터로 익힌다.","url":"https://memorybook.euiyun.com/chapters/dram-cell.html","position":4,"inLanguage":"ko","isAccessibleForFree":true,"learningResourceType":"인터랙티브 교재","educationalLevel":"공대 학부","image":"https://memorybook.euiyun.com/og.png","dateModified":"2026-10-01","isPartOf":{"@type":"Book","@id":"https://memorybook.euiyun.com/#book","name":"MemoryBook · 메모리 반도체 교과서","url":"https://memorybook.euiyun.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"MemoryBook","item":"https://memorybook.euiyun.com/"},{"@type":"ListItem","position":2,"name":"04. DRAM 셀과 어레이","item":"https://memorybook.euiyun.com/chapters/dram-cell.html"}]}]}</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
@@ -45,7 +59,7 @@
   <header class="chapter-hero">
     <div class="eyebrow">Chapter 04</div>
     <h1>DRAM 셀과 어레이</h1>
-    <p class="lead">DRAM 비트 하나는 트랜지스터 하나와 커패시터 하나, 즉 1T1C로 끝난다. 이 단순함 덕분에 스마트폰 한 대에 수백억 개의 비트가 들어간다. 대가도 있다. 셀이 가진 전하는 1만 개 남짓한 전자뿐이고, 읽으면 지워지며, 가만히 두어도 새어 나간다. 이 장에서는 그 작은 전하를 어떻게 읽어 내는지(전하 공유와 센스 앰프), 수십억 개의 셀을 어떻게 배열하는지(오픈/폴디드 비트라인, 6F²), 그리고 10 nm대 공정에서 셀이 어떤 입체 구조가 되었는지(매립 워드라인, 실린더 커패시터)를 3D 모델로 살펴본다.</p>
+    <p class="lead">DRAM 비트 하나는 트랜지스터 하나와 커패시터 하나, 즉 1T1C로 끝난다. 이 단순함 덕분에 스마트폰 한 대에 수백억 개의 비트가 들어간다. 대가도 있다. 셀이 가진 전하는 수만 개의 전자뿐이고, 읽으면 지워지며, 가만히 두어도 새어 나간다. 이 장에서는 그 작은 전하를 어떻게 읽어 내는지(전하 공유와 센스 앰프), 수십억 개의 셀을 어떻게 배열하는지(오픈/폴디드 비트라인, 6F²), 그리고 10 nm대 공정에서 셀이 어떤 입체 구조가 되었는지(매립 워드라인, 실린더 커패시터)를 3D 모델로 살펴본다.</p>
     <ul class="objectives">
       <li>1T1C 셀의 쓰기·유지·읽기 동작과 파괴적 읽기(destructive read)의 의미를 설명할 수 있다.</li>
       <li>전하 공유 식 \(\Delta V = \tfrac{V_{DD}}{2}\cdot\tfrac{C_s}{C_s+C_{BL}}\)으로 비트라인 신호를 계산하고, 전하 전송비가 설계를 어떻게 제약하는지 안다.</li>
@@ -647,7 +661,7 @@
         <div class="stat"><span class="k">EOT</span><span class="v" id="cap-o-eot">—</span></div>
         <div class="stat"><span class="k">ΔV (V<sub>DD</sub>=1.1 V)</span><span class="v" id="cap-o-dv">—</span></div>
       </div>
-      <div class="sim-note">해볼 것: ① 실린더에서 D를 40 → 26 nm로 줄여 보자. 안쪽 구멍이 유전막과 상부 전극으로 막히는 순간 안쪽 면을 쓸 수 없게 되어 C<sub>s</sub>가 급감한다. 필라 구조가 등장한 이유다. ② 필라, D = 30 nm에서 C<sub>s</sub> 10 fF를 얻으려면 H가 얼마여야 하는지, 그때의 종횡비를 확인하자. ③ 유전체를 SiO₂로 바꾸면 같은 크기에서 C<sub>s</sub>가 1/10로 준다. high-k 없이는 현대 DRAM이 불가능하다. (전극 두께 4 nm, 평행판 근사, 교육용 모형.)</div>
+      <div class="sim-note">해볼 것: ① 실린더에서 D를 40 → 25 nm로 줄여 보자. 안쪽 구멍이 유전막과 상부 전극으로 막히는 순간 안쪽 면을 쓸 수 없게 되어 C<sub>s</sub>가 급감한다. 필라 구조가 등장한 이유다. ② 필라, D = 30 nm에서 C<sub>s</sub> 10 fF를 얻으려면 H가 얼마여야 하는지, 그때의 종횡비를 확인하자. ③ 유전체를 SiO₂로 바꾸면 같은 크기에서 C<sub>s</sub>가 1/10로 준다. high-k 없이는 현대 DRAM이 불가능하다. (전극 두께 4 nm, 평행판 근사, 교육용 모형.)</div>
     </div>
     <div class="callout deep"><strong>종횡비 50:1이란</strong><p>지름 30 nm, 높이 1.5 µm인 구멍은 지름 1 m, 깊이 50 m인 우물과 비율이 같다. 이런 구멍 수십억 개를 웨이퍼 전체에 똑같은 모양으로 뚫어야 한다(몰드 식각). 식각 후에는 전극이 서로 기대어 붙는 <span class="term">리닝</span><span class="en">(Leaning)</span>과 쓰러짐을 막기 위해 SiN 서포터를 1~3층 넣는다. 서포터에 구멍을 뚫어 그 아래 몰드 산화막을 습식으로 녹여 내고, 드러난 전극 바깥면에 유전막을 입힌다.</p></div>
   </section>

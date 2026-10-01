@@ -1,7 +1,7 @@
 # MemoryBook — 인터랙티브 메모리 반도체 교과서
 
 비트 하나에서 테라바이트까지. 공대 학부생을 위한 한국어 메모리 반도체 학습 사이트입니다.
-14개 챕터, 70여 개의 시뮬레이터, 3D 구조 모델(three.js)로 구성됩니다.
+17개 챕터, 90여 개의 시뮬레이터, 3D 구조 모델(three.js)로 구성됩니다.
 
 ## 실행
 빌드 과정이 없는 정적 사이트입니다.
@@ -27,7 +27,10 @@ python3 -m http.server 8000   # → http://localhost:8000
 | 11 | chapters/reliability.html | 리텐션, 로우 해머, 디스터브, 해밍 코드~LDPC |
 | 12 | chapters/emerging.html | MRAM, PCM, ReRAM, FeRAM, CXL, PIM, CIM |
 | 13 | chapters/design.html | 루프라인, LLM 메모리 계산, 메모리 시스템 설계 플레이그라운드 |
-| 14 | chapters/glossary.html | 용어집, 종합 퀴즈(20문항) |
+| 14 | chapters/process.html | 리소그래피(EUV·멀티 패터닝), 고종횡비 식각, CVD/ALD, 공정 통합 |
+| 15 | chapters/test.html | 고장 모델, 마치 테스트, 리던던시 리페어, 수율 모델, 번인 |
+| 16 | chapters/industry.html | 비트당 원가, 메모리 사이클, 팹 경제학, HBM 공급 구조 |
+| 17 | chapters/glossary.html | 용어집, 종합 퀴즈(20문항) |
 
 공통 코드: `css/style.css`(디자인 토큰, 라이트/다크), `js/common.js`(내비게이션, 캔버스·차트·3D 헬퍼, 전역 `MB`).
 챕터 작성 규칙은 [CONTRIBUTING.md](CONTRIBUTING.md)를 참고하세요.

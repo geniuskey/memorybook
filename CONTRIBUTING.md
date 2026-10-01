@@ -20,6 +20,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>DRAM 셀과 어레이 · MemoryBook</title>
 <meta name="description" content="한 문장 설명">
+<!-- canonical · Open Graph · JSON-LD: 기존 챕터의 블록을 복사해 URL·제목·설명만 바꾼다 -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
@@ -48,6 +49,8 @@
 </html>
 ```
 상단바, 챕터 서랍, 목차, 이전/다음, 푸터, 테마 토글, 퀴즈 동작, KaTeX 렌더는 `common.js`가 자동 처리한다.
+
+챕터를 추가할 때는 `js/common.js`의 `CHAPTERS`, `sitemap.xml`, `index.html`의 JSON-LD `hasPart`, `chapters/glossary.html`의 챕터 칩(`#gl-ch`)과 `TERMS`에도 함께 등록한다.
 
 ## 컴포넌트
 ```html

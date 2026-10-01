@@ -5,6 +5,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>NAND 플래시 셀 · MemoryBook</title>
 <meta name="description" content="플로팅 게이트와 차지 트랩, 커플링 비, FN 터널링과 ISPP, NAND 스트링과 읽기, Vt 분포와 SLC~QLC, 셀 간 간섭과 디스터브까지 — 전원을 꺼도 남는 비트의 물리.">
+<link rel="canonical" href="https://memorybook.euiyun.com/chapters/nand.html">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<meta name="theme-color" content="#0e9384">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="MemoryBook">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="NAND 플래시 셀 · MemoryBook">
+<meta property="og:description" content="플로팅 게이트와 차지 트랩, 커플링 비, FN 터널링과 ISPP, NAND 스트링과 읽기, Vt 분포와 SLC~QLC, 셀 간 간섭과 디스터브까지 — 전원을 꺼도 남는 비트의 물리.">
+<meta property="og:url" content="https://memorybook.euiyun.com/chapters/nand.html">
+<meta property="og:image" content="https://memorybook.euiyun.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Chapter","LearningResource"],"@id":"https://memorybook.euiyun.com/chapters/nand.html#chapter","name":"NAND 플래시 셀","headline":"NAND 플래시 셀 · MemoryBook","description":"플로팅 게이트와 차지 트랩, 커플링 비, FN 터널링과 ISPP, NAND 스트링과 읽기, Vt 분포와 SLC~QLC, 셀 간 간섭과 디스터브까지 — 전원을 꺼도 남는 비트의 물리.","url":"https://memorybook.euiyun.com/chapters/nand.html","position":8,"inLanguage":"ko","isAccessibleForFree":true,"learningResourceType":"인터랙티브 교재","educationalLevel":"공대 학부","image":"https://memorybook.euiyun.com/og.png","dateModified":"2026-10-01","isPartOf":{"@type":"Book","@id":"https://memorybook.euiyun.com/#book","name":"MemoryBook · 메모리 반도체 교과서","url":"https://memorybook.euiyun.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"MemoryBook","item":"https://memorybook.euiyun.com/"},{"@type":"ListItem","position":2,"name":"08. NAND 플래시 셀","item":"https://memorybook.euiyun.com/chapters/nand.html"}]}]}</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
@@ -597,7 +611,7 @@
       <li><b>GCR 붕괴와 간섭 폭증:</b> 이웃 FG 사이에 ONO를 감쌀 공간이 사라져 GCR이 떨어지고 \(C_{FF}\)는 커졌다.</li>
       <li><b>리소그래피 비용:</b> 15 nm급 선폭은 ArF 액침 노광으로 다중 패터닝(SAQP 등)을 해야 해서 공정 비용이 급등했다.</li>
     </ul>
-    <p>해법은 셀을 옆으로 줄이는 대신 <b>위로 쌓는 것</b>이었다. 2013년 삼성이 24단 V-NAND를 양산한 이래, 셀 크기는 오히려 40 nm급으로 되돌리고(전자 수·간섭 문제 완화) 층수를 늘려 밀도를 높이는 3D NAND가 표준이 되었다. 2024~2025년에는 200~300단대 제품이 양산 중이다. 수직 채널 CTF 셀, 계단 구조, CMOS 언더 어레이는 <a href="vnand.html">9장</a>에서 3D로 살펴본다.</p>
+    <p>해법은 셀을 옆으로 줄이는 대신 <b>위로 쌓는 것</b>이었다. 2013년 삼성이 24단 V-NAND를 양산한 이래, 셀 크기는 오히려 40 nm급으로 되돌리고(전자 수·간섭 문제 완화) 층수를 늘려 밀도를 높이는 3D NAND가 표준이 되었다. 2024~2025년에는 200~300단대 제품이 양산되었고, 2026년에는 400단대 제품도 초기 양산에 들어갔다. 수직 채널 CTF 셀, 계단 구조, CMOS 언더 어레이는 <a href="vnand.html">9장</a>에서 3D로 살펴본다.</p>
     <div class="callout tip">
       <strong>숫자로 보는 스케일링</strong>
       <p>셀 피치를 20 nm → 15 nm로 줄이면 면적은 약 0.56배지만, 게이트 스택 높이는 거의 그대로여서 이웃 FG가 마주 보는 면적 대비 거리가 줄어 \(C_{FF}\)는 커지고 \(C_{CG}\)는 작아진다. 간섭 계수 \(\gamma\)가 커진 만큼 TLC의 좁은 상태 간격은 급격히 잠식된다. 3D NAND의 셀은 평면 20 nm 셀보다 크지만, 수백 층을 쌓아 평면 대비 수십 배의 비트 밀도를 얻는다.</p>

@@ -5,6 +5,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>메모리 계층 구조 · MemoryBook</title>
 <meta name="description" content="레지스터부터 캐시, DRAM, HBM, SSD, HDD까지 메모리 계층을 지연·대역폭·용량·가격으로 비교하고, 지역성·AMAT·리틀의 법칙·메모리 월을 시뮬레이터로 익힌다.">
+<link rel="canonical" href="https://memorybook.euiyun.com/chapters/hierarchy.html">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<meta name="theme-color" content="#0e9384">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="MemoryBook">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="메모리 계층 구조 · MemoryBook">
+<meta property="og:description" content="레지스터부터 캐시, DRAM, HBM, SSD, HDD까지 메모리 계층을 지연·대역폭·용량·가격으로 비교하고, 지역성·AMAT·리틀의 법칙·메모리 월을 시뮬레이터로 익힌다.">
+<meta property="og:url" content="https://memorybook.euiyun.com/chapters/hierarchy.html">
+<meta property="og:image" content="https://memorybook.euiyun.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["Chapter","LearningResource"],"@id":"https://memorybook.euiyun.com/chapters/hierarchy.html#chapter","name":"메모리 계층 구조","headline":"메모리 계층 구조 · MemoryBook","description":"레지스터부터 캐시, DRAM, HBM, SSD, HDD까지 메모리 계층을 지연·대역폭·용량·가격으로 비교하고, 지역성·AMAT·리틀의 법칙·메모리 월을 시뮬레이터로 익힌다.","url":"https://memorybook.euiyun.com/chapters/hierarchy.html","position":1,"inLanguage":"ko","isAccessibleForFree":true,"learningResourceType":"인터랙티브 교재","educationalLevel":"공대 학부","image":"https://memorybook.euiyun.com/og.png","dateModified":"2026-10-01","isPartOf":{"@type":"Book","@id":"https://memorybook.euiyun.com/#book","name":"MemoryBook · 메모리 반도체 교과서","url":"https://memorybook.euiyun.com/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"MemoryBook","item":"https://memorybook.euiyun.com/"},{"@type":"ListItem","position":2,"name":"01. 메모리 계층 구조","item":"https://memorybook.euiyun.com/chapters/hierarchy.html"}]}]}</script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
@@ -231,7 +245,7 @@
       <div class="sim-note">해볼 것: ① 지표를 ‘지연’으로 두고 DRAM과 SSD 막대 길이 차이(약 1000배)를 확인하자. ② ‘대역폭’으로 바꾸면 HBM3E가 DDR5 채널보다 한참 길다 — 지연은 비슷한데 대역폭만 크게 늘린 메모리다(<a href="hbm.html">7장</a>). ③ ‘$/GB’에서 SRAM 층은 추정치(다이 면적 환산)라 빗금으로 그렸다. SSD와 DRAM의 가격 차이가 수십 배라는 점이 두 층이 공존하는 이유다.</div>
     </div>
 
-    <div class="callout tip"><strong>왜 층마다 다른 소자를 쓰나</strong><p>SRAM 셀은 트랜지스터 6개로 약 0.02 µm²(3 nm급 공정 고밀도 셀), DRAM 셀은 트랜지스터 1개와 커패시터 1개로 0.002 µm² 안팎이다. 같은 면적에 DRAM이 대략 10배 이상 많은 비트를 담는다. NAND는 셀을 200단 넘게 수직으로 쌓고 셀당 3~4비트를 저장해 비트당 면적을 DRAM의 수십 분의 1로 줄였다. 대신 SRAM은 로직 공정 그대로 CPU 옆에 붙일 수 있어 가장 빠르다. <strong>빠름은 가까움과 단순한 읽기에서, 쌈은 작은 셀과 적층에서 나온다.</strong></p></div>
+    <div class="callout tip"><strong>왜 층마다 다른 소자를 쓰나</strong><p>SRAM 셀은 트랜지스터 6개로 약 0.02 µm²(3 nm급 공정 고밀도 셀), DRAM 셀은 트랜지스터 1개와 커패시터 1개로 0.0013 µm² 안팎(1b급)이다. 같은 면적에 DRAM이 대략 10배 이상 많은 비트를 담는다. NAND는 셀을 200단 넘게 수직으로 쌓고 셀당 3~4비트를 저장해 비트당 면적을 DRAM의 수십 분의 1로 줄였다. 대신 SRAM은 로직 공정 그대로 CPU 옆에 붙일 수 있어 가장 빠르다. <strong>빠름은 가까움과 단순한 읽기에서, 쌈은 작은 셀과 적층에서 나온다.</strong></p></div>
   </section>
 
   <!-- ============================================================ 3 -->
@@ -489,7 +503,7 @@
       </div>
       <div class="sim-note">해볼 것: ① H100, 70B, FP16, 배치 1 → 약 24 토큰/s. 정밀도를 FP8, INT4로 낮추면 읽을 바이트가 줄어 속도가 2배, 4배가 된다 — 양자화가 추론을 빠르게 하는 주된 이유다. ② 배치를 키우면 전체 처리량은 늘지만 연산 강도가 꺾이는 점을 지나면 더는 늘지 않는다. ③ PC 프리셋(~90 GB/s)에서 70B 모델은 1초에 1토큰도 어렵다. (KV 캐시·통신·효율 손실을 무시한 상한 모델이며, 프리셋 수치는 대략값이다.)</div>
     </div>
-    <div class="callout warn"><strong>용량도 병목이다</strong><p>70B FP16 모델의 가중치 140 GB는 HBM3 80 GB를 단 H100 한 장에 들어가지 않는다. 게다가 긴 문맥을 처리하면 토큰마다 쌓이는 KV 캐시가 수십 GB에 이를 수 있다. 그래서 가속기 한 개에 붙는 HBM 용량(H200 141 GB, B200 약 192 GB)과 여러 칩을 잇는 인터커넥트 대역폭이 대역폭만큼 중요해졌다. 메모리를 연산기 옆이나 안으로 옮기는 PIM·CXL 같은 시도는 <a href="emerging.html">12장</a>에서 다룬다.</p></div>
+    <div class="callout warn"><strong>용량도 병목이다</strong><p>70B FP16 모델의 가중치 140 GB는 HBM3 80 GB를 단 H100 한 장에 들어가지 않는다. 게다가 긴 문맥을 처리하면 토큰마다 쌓이는 KV 캐시가 수십 GB에 이를 수 있다. 그래서 가속기 한 개에 붙는 HBM 용량(H200 141 GB, B200 약 180 GB)과 여러 칩을 잇는 인터커넥트 대역폭이 대역폭만큼 중요해졌다. 메모리를 연산기 옆이나 안으로 옮기는 PIM·CXL 같은 시도는 <a href="emerging.html">12장</a>에서 다룬다.</p></div>
   </section>
 
   <!-- ============================================================ 7 -->

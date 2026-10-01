@@ -21,7 +21,10 @@
     { slug: "reliability", num: "11", title: "신뢰성과 오류 정정",        desc: "리텐션, 로우 해머, 디스터브, 내구성. 해밍 코드부터 LDPC까지 ECC.", tags: ["신뢰성", "sim"] },
     { slug: "emerging",    num: "12", title: "차세대 메모리와 PIM·CIM",   desc: "MRAM·PCM·ReRAM·FeRAM, CXL 메모리 확장, 뱅크 옆 연산(PIM)과 셀 어레이 연산(CIM).", tags: ["트렌드", "sim"] },
     { slug: "design",      num: "13", title: "메모리 시스템 설계",        desc: "루프라인 모델과 AI 가속기 메모리 선택. 대역폭·용량·전력을 직접 설계해 보자.", tags: ["종합", "sim"] },
-    { slug: "glossary",    num: "14", title: "용어집 & 종합 퀴즈",        desc: "핵심 용어 100여 개를 검색하고, 종합 퀴즈로 실력을 점검하자.", tags: ["정리"] },
+    { slug: "process",     num: "14", title: "메모리 제조 공정",          desc: "리소그래피·식각·증착의 반복. EUV와 멀티 패터닝, 고종횡비 식각, ALD로 셀을 쌓는 법.", tags: ["공정", "3d", "sim"] },
+    { slug: "test",        num: "15", title: "테스트와 수율",            desc: "고장 모델과 마치 테스트, 리던던시 리페어, 수율 모델, 번인과 배스터브 곡선.", tags: ["품질", "sim"] },
+    { slug: "industry",    num: "16", title: "메모리 산업과 시장",        desc: "비트당 원가, 메모리 사이클, 팹 경제학, HBM이 바꾼 공급 구조.", tags: ["산업", "sim"] },
+    { slug: "glossary",    num: "17", title: "용어집 & 종합 퀴즈",        desc: "핵심 용어 200여 개를 검색하고, 종합 퀴즈로 실력을 점검하자.", tags: ["정리"] },
   ];
 
   const MB = (window.MB = {});
