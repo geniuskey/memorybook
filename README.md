@@ -36,3 +36,14 @@ python3 -m http.server 8000   # → http://localhost:8000
 챕터 작성 규칙은 [CONTRIBUTING.md](CONTRIBUTING.md)를 참고하세요.
 
 시뮬레이터의 수치는 교육용 근사 모델입니다. 제품 수치는 2024~2026년 공개 자료 기준의 대략값입니다.
+
+## 라이선스
+
+Copyright (c) 2026 geniuskey and MemoryBook contributors
+
+| 적용 대상 | 라이선스 | 재사용 조건 |
+|---|---|---|
+| JS·CSS·Python·HTML의 실행 코드 | [MIT](LICENSE-MIT) | 수정·재배포·상업적 이용 가능. 저작권 및 라이선스 고지 유지 |
+| 교재 본문·그림·문제·해설 | [CC BY 4.0](LICENSE-CC-BY-4.0) | 수정·번역·재배포·상업적 이용 가능. 저작자·출처·라이선스 표시 및 변경 사실 명시 |
+
+HTML 및 JS 안의 교육 콘텐츠에도 CC BY 4.0을 적용합니다. 적용 범위, 출처 표시 예시 및 외부 자료에 대한 안내는 [라이선스 안내](LICENSE.md)를 참고하세요.

@@ -1,3 +1,6 @@
+/* Copyright (c) 2026 geniuskey and MemoryBook contributors.
+   Executable code: MIT (see ../LICENSE-MIT).
+   Educational content and illustrations: CC-BY-4.0 (see ../LICENSE.md). */
 /* ==========================================================================
    MemoryBook 공통 스크립트 — 전역 객체 MB
    - 레이아웃(상단바, 목차, 이전/다음, 테마) 자동 생성
@@ -507,7 +510,8 @@
     }
     const foot = document.createElement("footer");
     foot.className = "mb-foot";
-    foot.innerHTML = `MemoryBook — 공학도를 위한 인터랙티브 메모리 반도체 교과서 · 수치는 교육용 근사 모델입니다.`;
+    foot.innerHTML = `MemoryBook — 공학도를 위한 인터랙티브 메모리 반도체 교과서 · 수치는 교육용 근사 모델입니다.<br>
+      © 2026 geniuskey 및 MemoryBook 기여자 · 콘텐츠 <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> · 코드 <a href="${root}LICENSE-MIT">MIT</a> · <a href="${root}LICENSE.md">라이선스 안내</a>`;
     body.appendChild(foot);
 
     // quiz

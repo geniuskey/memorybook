@@ -3,6 +3,10 @@
 빌드 과정 없는 정적 사이트다. `index.html` + `chapters/<slug>.html` + 공통 `css/style.css`, `js/common.js`.
 로컬 실행: `python3 -m http.server 8000` → http://localhost:8000 (file://로 열어도 동작하게 classic script만 사용한다. ES module 금지.)
 
+## 기여물의 라이선스
+
+기여하는 실행 코드는 MIT, 본문·그림·문제·해설 등 교육 콘텐츠는 CC BY 4.0으로 제공합니다. 혼합 파일과 코드 예제의 구분은 [라이선스 안내](LICENSE.md)를 따릅니다. 외부 자료를 추가할 때는 원저작자·출처·라이선스를 명시하고 원래 고지를 유지하세요.
+
 ## 원칙
 - **한국어**, 대상은 공대 학부생(전자회로·반도체 소자·컴퓨터 구조 기초가 있다고 가정). 영어 원어는 `<span class="en">(Sense Amplifier)</span>`처럼 병기.
 - 개념 → 직관 그림(SVG) → 수식(KaTeX) → 시뮬레이터 → 실제 수치 예 → 요약/퀴즈 순서.
