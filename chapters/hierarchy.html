@@ -458,8 +458,8 @@
     </div>
 
     <h3>AI 시대의 병목: 파라미터를 읽는 시간</h3>
-    <p>대형 언어 모델(LLM)이 토큰 하나를 생성할 때(디코드 단계)는 모든 가중치를 한 번씩 읽어 곱셈-누산을 한다. 파라미터가 \(P\)개면 연산은 약 \(2P\) FLOP, 읽는 데이터는 \(P \times b\) 바이트(\(b\): 파라미터당 바이트)다. 배치 크기 1이면 바이트당 연산이 \(2/b\), FP16에서는 <strong>1 FLOP/B</strong>에 불과하다. 700억(70B) 파라미터 모델을 FP16으로 두면 140 GB이고, HBM3를 쓰는 H100 SXM(~3.35 TB/s)도 이를 한 번 읽는 데 약 42 ms가 걸린다. 연산기가 아무리 빨라도 초당 약 24 토큰이 상한이다.</p>
-    <div class="formula">$$\text{토큰/s}\big|_\text{배치 1} \;\lesssim\; \frac{BW_\text{mem}}{P\cdot b} = \frac{3.35\times10^{12}\ \text{B/s}}{70\times10^{9}\times 2\ \text{B}} \approx 24$$<div class="where">KV 캐시 읽기와 활성값은 무시한 상한이다. 여러 사용자의 요청을 묶어(배치) 같은 가중치로 여러 토큰을 계산하면 바이트당 연산이 배치 크기만큼 늘어난다.</div></div>
+    <p>밀집 대형 언어 모델(LLM)의 디코드 단계에서 배치 1로 토큰 하나를 생성할 때는 주요 선형층의 가중치를 주 메모리에서 한 번씩 읽는다고 근사한다. 파라미터가 \(P\)개면 연산은 약 \(2P\) FLOP, 읽는 데이터는 \(P \times b\) 바이트(\(b\): 파라미터당 바이트)다. 배치 크기 1이면 바이트당 연산이 \(2/b\), FP16에서는 <strong>1 FLOP/B</strong>에 불과하다. 700억(70B) 파라미터 모델을 FP16으로 두면 140 GB이고, HBM3를 쓰는 H100 SXM(~3.35 TB/s)도 이를 한 번 읽는 데 약 42 ms가 걸린다. 연산기가 아무리 빨라도 초당 약 24 토큰이 상한이다.</p>
+    <div class="formula">$$\text{토큰/s}\big|_\text{배치 1} \;\lesssim\; \frac{BW_\text{mem}}{P\cdot b} = \frac{3.35\times10^{12}\ \text{B/s}}{70\times10^{9}\times 2\ \text{B}} \approx 24$$<div class="where">밀집 모델의 가중치 읽기를 가정하며, KV 캐시 읽기와 활성값은 무시한 상한이다. MoE 모델에서는 선택된 전문가와 공유층의 실제 읽기량을 사용해야 하며, 전체 파라미터의 저장 용량과 토큰별 활성 가중치 읽기량은 다르다. 여러 사용자의 요청을 묶어(배치) 같은 가중치로 여러 토큰을 계산하면 바이트당 연산이 배치 크기만큼 늘어난다.</div></div>
     <p>이 관계를 일반화한 것이 <span class="term">루프라인 모델</span><span class="en">(Roofline Model)</span>이다. 커널의 <em>연산 강도</em> \(I\)(FLOP/바이트)에 따라 도달 가능한 성능이 메모리 대역폭 지붕과 연산 지붕 중 낮은 쪽으로 결정된다.</p>
     <div class="formula">$$\text{성능}_\text{도달} = \min\big(\text{Peak FLOPS},\; BW_\text{mem}\times I\big), \qquad I_\text{ridge} = \frac{\text{Peak FLOPS}}{BW_\text{mem}}$$<div class="where">H100 SXM의 FP16 밀집 연산은 약 989 TFLOPS, 대역폭은 3.35 TB/s이므로 \(I_\text{ridge} \approx 295\) FLOP/B. 연산 강도가 이보다 낮은 커널은 전부 메모리가 성능을 결정한다.</div></div>
     <figure class="diagram">
@@ -488,7 +488,7 @@
     </figure>
 
     <div class="sim" id="sim-roof">
-      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>LLM 디코드 루프라인 계산기</h3></div>
+      <div class="sim-head"><span class="sim-tag">SIMULATOR</span><h3>밀집 LLM 디코드 루프라인 계산기</h3></div>
       <div class="sim-body side">
         <div class="sim-view"><canvas id="cv-roof"></canvas></div>
         <div class="sim-controls">
@@ -569,7 +569,7 @@
       <li>\(AMAT = t_{hit} + m\cdot t_{miss}\). 미스 벌칙이 히트 시간의 수십 배이므로 미스율 몇 %가 성능을 좌우하고, 다단 캐시는 미스 벌칙을 재귀적으로 줄인다.</li>
       <li>대역폭과 지연은 다른 축이다. 리틀의 법칙에 따라 최대 대역폭을 쓰려면 대역폭 × 지연 / 요청 크기만큼의 요청이 동시에 떠 있어야 한다. CPU는 수십, GPU는 수만 개의 동시 요청으로 대역폭을 채운다.</li>
       <li>메모리 월: 프로세서 성능이 DRAM 지연 개선보다 훨씬 빨리 늘어 격차가 천 배 이상으로 벌어졌고, 오늘날에는 연산(FLOPS) 대비 메모리 대역폭 부족이 병목이다.</li>
-      <li>LLM 디코드(배치 1)는 연산 강도 ~1 FLOP/B의 메모리 바운드 작업이라 토큰/s 상한 ≈ 메모리 대역폭 / 가중치 바이트다. 그래서 HBM의 대역폭·용량, 양자화, 배치가 AI 성능을 결정한다.</li>
+      <li>밀집 LLM 디코드(배치 1, FP16 가중치 읽기 근사)는 연산 강도 ~1 FLOP/B의 메모리 바운드 작업이라 토큰/s 상한 ≈ 메모리 대역폭 / 가중치 바이트다. 그래서 HBM의 대역폭·용량, 양자화, 배치가 AI 성능을 결정한다.</li>
     </ol>
   </section>
 

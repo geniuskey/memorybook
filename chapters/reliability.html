@@ -107,9 +107,9 @@
     <p>DRAM 셀의 임계 전하는 대략 \(Q_{crit}\approx C_s\,\Delta V\)이다. \(C_s=10\) fF, 센싱 여유 0.5 V이면 약 5 fC, 전자 3만 개 정도다. 공정이 미세해지면서 셀당 \(Q_{crit}\)은 거의 그대로 유지됐다(<a href="dram-cell.html">4장</a>의 실린더 커패시터 덕분이다). 반면 전하를 모으는 면적은 빠르게 줄었다. 그래서 DRAM의 <b>비트당</b> 소프트 에러율(SER)은 1990년대 이후 여러 세대에 걸쳐 1000배 이상 줄었고(Baumann, 2005), 칩·시스템당 SER은 대략 비슷하게 유지됐다. 대신 셀이 촘촘해지면서 입자 하나가 인접한 여러 비트를 함께 뒤집는 <b>다중 비트 업셋</b>(MBU)의 비중이 커졌다. 단일 비트 정정만으로는 부족해지는 이유다.</p>
 
     <h3>FIT, MTBF, 그리고 배스터브 곡선</h3>
-    <p>반도체 신뢰성의 기본 단위는 <span class="term">FIT</span><span class="en">(Failures In Time)</span>이다. 10억(10⁹) 소자·시간당 고장 수를 뜻한다. 고장률 \(\lambda\)가 시간에 따라 일정하다면(우발 고장 구간) 고장은 지수 분포를 따르고, 평균 고장 간격은 FIT의 역수가 된다.</p>
-    <div class="formula">$$\lambda\;[\mathrm{FIT}] = \frac{N_{\text{fail}}}{N_{\text{dev}}\cdot t\,[\mathrm{h}]}\times 10^{9},\qquad R(t)=e^{-\lambda t},\qquad \mathrm{MTBF}=\frac{10^{9}}{\lambda_{\mathrm{FIT}}}\ \mathrm{h}$$
-      <div class="where">시스템의 FIT는 부품 FIT의 합이다(직렬 신뢰성 모델). \(R(t)\)는 시간 \(t\)까지 고장 나지 않을 확률.</div></div>
+    <p>반도체 신뢰성의 기본 단위는 <span class="term">FIT</span><span class="en">(Failures In Time)</span>이다. 10억(10⁹) 소자·시간당 고장 수를 뜻한다. 시간당 고장률 \(\lambda_h\)[h⁻¹]가 일정하다면(우발 고장 구간) 고장은 지수 분포를 따르고, 평균 고장 간격은 \(1/\lambda_h\)가 된다. FIT 숫자를 시간당 고장률로 바꾸려면 10⁻⁹를 곱한다.</p>
+    <div class="formula">$$\lambda_{\mathrm{FIT}} = \frac{N_{\text{fail}}}{N_{\text{dev}}\cdot t\,[\mathrm{h}]}\times 10^{9},\qquad \lambda_h=\lambda_{\mathrm{FIT}}\times10^{-9}\ \mathrm{h}^{-1},\qquad R(t)=e^{-\lambda_h t},\qquad \mathrm{MTBF}=\frac{10^{9}}{\lambda_{\mathrm{FIT}}}\ \mathrm{h}$$
+      <div class="where">시스템의 FIT는 부품 FIT의 합이다(직렬 신뢰성 모델). \(R(t)\)는 시간 \(t\)[h]까지 고장 나지 않을 확률이다. 예를 들어 50 FIT에서 1,000 h까지의 생존 확률은 \(e^{-50\times10^{-9}\times1000}\approx0.999950\)이다.</div></div>
     <p>숫자로 감을 잡아 보자. DRAM 칩 하나가 50 FIT이면 MTBF는 2×10⁷ 시간, 약 2,300년이다. 하지만 데이터센터 한 구역에 칩이 10만 개 있으면 시스템 FIT는 5×10⁶, MTBF는 200 시간이다. <b>여드레에 한 번씩 어딘가에서 메모리 오류가 난다</b>는 뜻이다. 개별 칩은 충분히 튼튼해도 규모가 커지면 오류는 일상이 된다. 서버에 ECC가 필수인 이유가 여기 있다.</p>
 
     <figure class="diagram">
@@ -618,7 +618,7 @@
     <h3>코드워드 실패 확률과 UBER</h3>
     <p>각 비트가 독립적으로 확률 \(p\)(=RBER)로 틀린다고 하자. \(n\)비트 코드워드에서 오류 개수는 이항 분포를 따른다. \(t\)비트까지 정정하는 부호라면 오류가 \(t\)개를 넘을 때 실패한다.</p>
     <div class="formula">$$P_{fail}=\sum_{i=t+1}^{n}\binom{n}{i}p^{\,i}(1-p)^{\,n-i},\qquad \mathrm{UBER}\approx\frac{P_{fail}}{k},\qquad R=\frac{k}{n}$$
-      <div class="where">\(k\): 코드워드의 데이터 비트 수, \(R\): 코드율. BCH는 GF(2<sup>m</sup>) 위에서 패리티 약 \(m\cdot t\)비트로 \(t\)비트를 정정한다(1 KB면 \(m=14\)).</div></div>
+      <div class="where">\(k\): 코드워드의 데이터 비트 수, \(R\): 코드율. UBER 근사는 실패한 코드워드 하나를 데이터 오류 한 건으로 세고 데이터 k비트를 읽는다고 가정한다. 실제 섹터와 코드워드의 매핑, 오류 계수 및 재읽기 정책은 SSD 평가 규칙을 따라야 한다. BCH는 GF(2<sup>m</sup>) 위에서 패리티 약 \(m\cdot t\)비트로 \(t\)비트를 정정한다(1 KB면 \(m=14\)).</div></div>
     <p><b>BCH</b> 코드는 오류 위치를 대수적으로 정확히 찾는다(신드롬 → 벌리캠프-매시 알고리즘 → 치엔 탐색). 정정 능력 \(t\)가 확정적이고 에러 플로어가 없다. 하지만 RBER이 높아지면 \(t\)와 패리티가 선형으로 늘고, 디코더 복잡도는 더 빠르게 늘어난다. 3D NAND와 TLC가 등장한 2010년대 중반부터 SSD는 <span class="term">LDPC</span><span class="en">(Low-Density Parity-Check)</span>로 넘어갔다. LDPC는 크고 성긴 패리티 검사 행렬을 쓰고, 변수 노드와 검사 노드 사이에 확률 메시지를 반복해서 주고받는 <b>빌리프 전파</b><span class="en">(belief propagation)</span>로 디코딩한다. 이론 한계(섀넌 한계)에 가깝게 동작한다.</p>
 
     <figure class="diagram">
@@ -674,7 +674,7 @@
     </div>
 
     <div class="callout tip"><strong>UBER 10⁻¹⁵의 실감</strong>
-      <p>10⁻¹⁵은 1 PB(8×10¹⁵ 비트)를 읽을 때 정정 불가 오류가 약 8비트라는 뜻이다. 매일 1 TB씩 읽는 클라이언트 SSD라면 넉 달가량(125 TB, 10¹⁵비트) 읽어야 평균적으로 정정 불가 비트 하나를 만난다. 원시 RBER 10⁻³인 셀에서 여기까지 끌어내리는 것은 무려 <b>12자릿수</b>의 개선이다. 그리고 그 대가는 패리티 10~15%와 컨트롤러의 디코더 실리콘뿐이다. 오류 정정은 메모리 역사상 가장 효율적인 투자 중 하나다.</p></div>
+      <p>UBER은 읽은 비트 수당 정정 불가 데이터 오류 사건 수다. JEDEC SSD 평가에서 손상된 섹터 하나는 잘못된 비트 수와 무관하게 데이터 오류 한 건으로 센다. 수명 평균 UBER을 10⁻¹⁵로 가정하면 1 PB(8×10¹⁵ 비트)당 평균 약 8건, 125 TB(10¹⁵ 비트)당 약 1건에 해당한다. 이는 특정 읽기 시점의 오류 확률이나 오류 사이의 일정한 간격을 보장하지 않으며, 실제 정격은 보존·사용 조건과 수명 평가 절차를 포함한다. 원시 RBER 10⁻³에서 UBER 10⁻¹⁵까지 수치를 낮추는 ECC의 효과는 크지만, 비트 오류율과 섹터 오류 사건율의 계수 단위는 구분해야 한다. 그리고 그 대가는 패리티 10~15%와 컨트롤러의 디코더 실리콘뿐이다. 오류 정정은 메모리 역사상 가장 효율적인 투자 중 하나다.</p></div>
   </section>
 
   <!-- ============================================================ summary -->

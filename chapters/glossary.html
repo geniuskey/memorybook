@@ -208,7 +208,7 @@
     { ko: "1T1C 셀", en: "One-transistor one-capacitor cell", abbr: "1T1C", def: "접근 트랜지스터 1개와 스토리지 커패시터 1개로 된 DRAM 셀. 셀 커패시턴스는 보통 약 10~20 fF 수준이다.", ch: "dram-cell" },
     { ko: "전하 공유", en: "Charge sharing", abbr: "", def: "워드라인이 열리면 셀 커패시터와 VDD/2로 프리차지된 비트라인이 전하를 나눠 갖는 과정. ΔV = (VDD/2)·Cs/(Cs+Cbl)로 보통 수십~100 mV 정도의 신호가 생긴다.", ch: "dram-cell" },
     { ko: "비트라인", en: "Bitline", abbr: "BL", def: "셀의 데이터를 센스 앰프로 전달하는 세로 배선. 기생 커패시턴스(약 60~120 fF)가 셀보다 커서 전하 공유 신호를 작게 만든다.", ch: "dram-cell" },
-    { ko: "워드라인", en: "Wordline", abbr: "WL", def: "한 로우의 접근 트랜지스터 게이트를 묶은 가로 배선. DRAM은 셀 누설을 줄이려 VPP(약 2.5~3 V 이상)로 승압해 구동한다.", ch: "dram-cell" },
+    { ko: "워드라인", en: "Wordline", abbr: "WL", def: "한 로우의 접근 트랜지스터 게이트를 묶은 가로 배선. DRAM은 쓰기·복원 때 VDD를 NMOS 문턱 전압 손실 없이 전달하려 VPP로 승압해 구동한다. 보존 때는 워드라인을 끄고 보통 음의 바이어스로 액세스 트랜지스터 누설을 줄인다.", ch: "dram-cell" },
     { ko: "오픈 비트라인", en: "Open bitline", abbr: "", def: "센스 앰프 양쪽 매트의 비트라인을 한 쌍으로 쓰는 구조. 모든 교차점에 셀을 둘 수 있어 6F² 셀이 가능하지만 잡음 상쇄가 약하다.", ch: "dram-cell" },
     { ko: "폴디드 비트라인", en: "Folded bitline", abbr: "", def: "같은 매트 안의 이웃 비트라인 두 개를 쌍으로 쓰는 구조. 공통 모드 잡음에 강하지만 셀을 교차점 절반에만 둘 수 있어 8F²가 된다.", ch: "dram-cell" },
     { ko: "매립 채널 어레이 트랜지스터", en: "Buried channel array transistor", abbr: "BCAT", def: "워드라인을 실리콘 트렌치 안에 묻은 셀 트랜지스터. 유효 채널 길이를 늘려 누설을 줄이면서 6F² 셀을 가능케 한 현대 DRAM의 표준 구조다.", ch: "dram-cell" },

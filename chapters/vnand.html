@@ -235,7 +235,7 @@
         <div class="stat"><span class="k">곡률 이득</span><span class="v" id="vnxs-o-g">—</span></div>
         <div class="stat"><span class="k">코어 반지름</span><span class="v" id="vnxs-o-core">—</span></div>
       </div>
-      <div class="sim-note">해볼 것: ① 홀 반지름을 80 nm에서 30 nm로 줄이며 “곡률 이득”을 보자. 작은 홀일수록 터널막 전계는 커지고 블로킹막 전계는 작아진다. ② 블로킹막을 고유전율(Al₂O₃ 포함)로 바꾸면 블로킹막 전계가 더 떨어지고 같은 V<sub>G</sub>에서 터널막 전계가 올라간다. 소거 시 게이트 백 주입을 막는 데 유리하다. ③ 채널을 두껍게 하면 코어가 좁아지며 반지름 r₁이 줄어 전계가 조금 오른다. (교육용: 트랩 전하와 채널 전위는 무시한 정전기 모델)</div>
+      <div class="sim-note">해볼 것: ① 홀 반지름을 80 nm에서 30 nm로 줄이며 “곡률 이득”을 보자. 작은 홀일수록 터널막 전계는 커지고 블로킹막 전계는 작아진다. ② 블로킹막을 고유전율(Al₂O₃ 포함)로 바꾸면 블로킹막 전계가 더 떨어지고 같은 V<sub>G</sub>에서 터널막 전계가 올라간다. 소거 시 게이트 백 주입을 막는 데 유리하다. ③ 홀 반지름과 유전막 두께를 고정한 채 채널을 두껍게 하면 코어 반지름 r₀만 줄어든다. 터널막 안쪽 반지름 r₁은 그대로이므로 이 정전기 모델의 유전막 전계는 바뀌지 않는다. (교육용: 트랩 전하와 채널 전위는 무시한 정전기 모델)</div>
     </div>
   </section>
 
@@ -627,9 +627,9 @@
         <div class="stat"><span class="k">이상적 셀 밀도</span><span class="v" id="vnbd-o-raw">—</span></div>
         <div class="stat"><span class="k">다이 비트 밀도</span><span class="v" id="vnbd-o-den">—</span></div>
         <div class="stat"><span class="k">다이 용량</span><span class="v" id="vnbd-o-cap">—</span></div>
-        <div class="stat"><span class="k">1Tb에 필요한 면적</span><span class="v" id="vnbd-o-tb">—</span></div>
+        <div class="stat"><span class="k">1 Tibit(2⁴⁰ bit)에 필요한 면적</span><span class="v" id="vnbd-o-tb">—</span></div>
       </div>
-      <div class="sim-note">해볼 것: ① 기본값(236단 TLC, 150 nm, η 70%, f 60%)에서 다이 밀도가 ~15 Gb/mm²인지 확인하자. ② 어레이 비율 f를 60%(주변 회로 옆)에서 85%(CuA/본딩)로 올리면 같은 단수로도 밀도가 40% 이상 오른다. ③ 단수를 두 배로 올리는 것과 QLC로 바꾸는 것의 효과를 비교해 보자. QLC는 층 수 +33%와 같은 효과지만 속도·내구성을 희생한다(<a href="nand.html">8장</a>). ④ 홀 피치를 줄이면(홀을 촘촘히) 밀도가 p²에 반비례해 오르지만 식각 난도와 셀 간 간섭이 커진다.</div>
+      <div class="sim-note">밀도·용량 표시의 Gb와 Tb는 각각 10⁹ bit와 10¹² bit다. 목표 다이 면적은 이진 용량 1 Tibit = 2⁴⁰ bit(약 1099.512 Gb)를 기준으로 계산한다. 해볼 것: ① 기본값(236단 TLC, 150 nm, η 70%, f 60%)에서 다이 밀도가 ~15 Gb/mm²인지 확인하자. ② 어레이 비율 f를 60%(주변 회로 옆)에서 85%(CuA/본딩)로 올리면 같은 단수로도 밀도가 40% 이상 오른다. ③ 단수를 두 배로 올리는 것과 QLC로 바꾸는 것의 효과를 비교해 보자. QLC는 층 수 +33%와 같은 효과지만 속도·내구성을 희생한다(<a href="nand.html">8장</a>). ④ 홀 피치를 줄이면(홀을 촘촘히) 밀도가 p²에 반비례해 오르지만 식각 난도와 셀 간 간섭이 커진다.</div>
     </div>
 
     <h3>계단의 면적 비용</h3>
@@ -1332,7 +1332,8 @@
     var gE = MB.range("vnbd-eta", function (v) { return v + "%"; }, re);
     var gF = MB.range("vnbd-af", function (v) { return v + "%"; }, re);
     var gA = MB.range("vnbd-die", function (v) { return v + " mm²"; }, re);
-    function dens(N, b, p, eta, f) {                    // Gb/mm²
+    var TARGET_GB = Math.pow(2, 40) / 1e9;             // 1 Tibit in decimal Gb
+    function dens(N, b, p, eta, f) {                    // decimal Gb/mm²
       var Ah = Math.sqrt(3) / 2 * Math.pow(p / 1000, 2);  // µm²
       return N * b * eta * f / Ah * 1e6 / 1e9;
     }
@@ -1345,8 +1346,8 @@
       MB.stat("vnbd-o-hd", MB.fmt(1 / Ah, 3) + "<small>홀/µm²</small>");
       MB.stat("vnbd-o-raw", MB.fmt(raw, 3) + "<small>Gb/mm²</small>");
       MB.stat("vnbd-o-den", MB.fmt(den, 3) + "<small>Gb/mm²</small>");
-      MB.stat("vnbd-o-cap", cap >= 1000 ? MB.fmt(cap / 1024, 3) + "<small>Tb</small>" : MB.fmt(cap, 3) + "<small>Gb</small>");
-      MB.stat("vnbd-o-tb", MB.fmt(1024 / den, 3) + "<small>mm²</small>");
+      MB.stat("vnbd-o-cap", cap >= 1000 ? MB.fmt(cap / 1000, 3) + "<small>Tb</small>" : MB.fmt(cap, 3) + "<small>Gb</small>");
+      MB.stat("vnbd-o-tb", MB.fmt(TARGET_GB / den, 3) + "<small>mm²</small>");
       var names = ["", "SLC", "MLC", "TLC", "QLC", "PLC"];
       var series = [], ymax = 0;
       [1, 2, 3, 4, 5].forEach(function (bb) {
@@ -1360,7 +1361,7 @@
       var C = MB.chart(ctx, box, {
         x: [24, 500], y: [0, ym], series: series,
         vlines: [{ x: N, color: P.accent2, label: N + "단" }],
-        hlines: [{ y: 1024 / A, color: P.warn, label: "이 면적에서 1Tb" }],
+        hlines: [{ y: TARGET_GB / A, color: P.warn, label: "이 면적에서 1 Tibit" }],
         points: [{ x: N, y: den, color: P.accent, r: 5 }],
         xLabel: "데이터 워드라인 층 수", yLabel: "다이 비트 밀도 (Gb/mm²)"
       });

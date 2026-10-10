@@ -153,7 +153,7 @@
     <p>동작은 다음 세 가지다.</p>
     <ul>
       <li><strong>쓰기</strong>: 비트라인을 \(V_{DD}\)(데이터 '1') 또는 0 V('0')로 만들고 워드라인을 켠다. 커패시터가 비트라인 전압까지 충전·방전되면 워드라인을 끈다. NMOS 액세스 트랜지스터가 \(V_{DD}\)를 문턱 전압 손실 없이 넘기도록 워드라인은 \(V_{DD}\)보다 높은 <span class="term">V<sub>PP</sub></span>(대략 2.5~3 V)로 구동한다.</li>
-      <li><strong>유지</strong>: 워드라인을 끄면(보통 약간 음전압으로) 커패시터는 섬처럼 고립된다. 하지만 접합 누설, 서브스레숄드 누설, GIDL 등으로 전하가 조금씩 빠져나간다(<a href="device.html">2장</a>). 그래서 표준은 모든 셀을 64 ms(고온에서는 32 ms)마다 다시 읽고 써 주는 <span class="term">리프레시</span><span class="en">(Refresh)</span>를 요구한다. 'Dynamic'이라는 이름이 여기서 왔다(<a href="dram-ops.html">5장</a>).</li>
+      <li><strong>유지</strong>: 워드라인을 끄면(보통 약간 음전압으로) 커패시터는 섬처럼 고립된다. 하지만 접합 누설, 서브스레숄드 누설, GIDL 등으로 전하가 조금씩 빠져나간다(<a href="device.html">2장</a>). 그래서 세대별 규격의 리프레시 창 안에 모든 셀을 다시 읽고 써 주는 <span class="term">리프레시</span><span class="en">(Refresh)</span>를 요구한다. 대표적인 DDR4는 85 °C까지 64 ms, 85~95 °C에서 32 ms이며, DDR5는 같은 온도 구간에서 각각 32 ms와 16 ms다. 더 높은 온도 및 세부 동작 모드는 제품 규격을 확인해야 한다. 'Dynamic'이라는 이름이 여기서 왔다(<a href="dram-ops.html">5장</a>).</li>
       <li><strong>읽기</strong>: 비트라인을 미리 \(V_{DD}/2\)로 맞춘 뒤 워드라인을 켜면, 셀 전하가 비트라인과 나뉘면서 비트라인 전압이 아주 조금 오르거나 내린다. 이 변화를 센스 앰프가 증폭한다. 전하를 나누는 순간 셀의 원래 전압은 사라지므로 읽기는 <span class="term">파괴적</span><span class="en">(Destructive Read)</span>이며, 센스 앰프가 증폭한 전압으로 셀을 다시 채우는 <span class="term">복원</span><span class="en">(Restore)</span>이 읽기의 일부다.</li>
     </ul>
     <p>저장 전하는 얼마나 될까? \(C_s = 10\) fF에 \(V_{DD}/2 = 0.55\) V만큼의 차이를 저장한다면 \(Q = C\Delta V = 5.5\) fC, 전자로 약 34,000개다. 플레이트가 \(V_{DD}/2\)이므로 '1'과 '0'은 각각 \(\pm 0.55\) V의 극성으로 저장되고, 유전막에 걸리는 전압은 최대 \(V_{DD}/2\)에 그친다. 얇은 high-k 유전막의 신뢰성을 위해 플레이트를 \(V_{DD}/2\)에 두는 것이다.</p>
