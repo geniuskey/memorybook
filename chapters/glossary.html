@@ -220,7 +220,7 @@
       }
       var c = CH[t.ch];
       html.push('<div class="gl-item" id="term-' + TERMS.indexOf(t) + '"><h4>' + hl(t.ko, qLow) + '<span class="en">' + hl(t.en, qLow) + "</span>" +
-        (t.abbr ? '<span class="abbr">' + hl(t.abbr, qLow) + "</span>" : "") + "</h4><p>" + esc(t.def) + "</p>" +
+        (t.abbr && t.abbr.toLowerCase() !== t.ko.toLowerCase() ? '<span class="abbr">' + hl(t.abbr, qLow) + "</span>" : "") + "</h4><p>" + esc(t.def) + "</p>" +
         '<a class="ch" href="' + t.ch + '.html">→ Ch.' + c.num + " " + esc(c.title) + "</a></div>");
     });
     listEl.innerHTML = html.join("");

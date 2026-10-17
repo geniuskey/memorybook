@@ -41,10 +41,12 @@
     { ko: "공간 지역성", en: "Spatial locality", abbr: "", def: "접근한 주소 근처의 데이터도 곧 접근될 가능성이 높다는 성질. 배열 순차 접근이 대표적이며, 캐시가 64바이트 라인 단위로 가져오는 근거가 된다.", ch: "hierarchy" },
     { ko: "평균 메모리 접근 시간", en: "Average memory access time", abbr: "AMAT", def: "AMAT = 적중 시간 + 미스율 × 미스 페널티. 다단 캐시라면 미스 페널티 자리에 다음 단계의 AMAT이 재귀적으로 들어간다.", ch: "hierarchy" },
     { ko: "메모리 월", en: "Memory wall", abbr: "", def: "프로세서 연산 성능은 빠르게 늘었지만 DRAM 지연과 대역폭 향상은 훨씬 느려서, 메모리가 시스템 성능의 병목이 되는 현상. 1990년대 중반 Wulf·McKee가 이름 붙였다.", ch: "hierarchy" },
-    { ko: "적중률 / 미스율", en: "Hit rate / Miss rate", abbr: "", def: "요청한 데이터가 해당 계층에 있는 비율(적중률)과 없는 비율(미스율). 미스율이 1 %p만 달라도 DRAM 페널티가 수백 사이클이라 AMAT이 크게 변한다.", ch: "hierarchy" },
+    {"ko":"적중률","en":"Hit rate","abbr":"","def":"요청한 데이터가 해당 메모리 계층에 있는 비율. 미스율과 합하면 100%이며, 적중률이 높을수록 느린 하위 계층에 접근하는 횟수가 줄어든다.","ch":"hierarchy"},
+    {"ko":"미스율","en":"Miss rate","abbr":"","def":"요청한 데이터가 해당 메모리 계층에 없는 비율. AMAT = 적중 시간 + 미스율 × 미스 페널티이므로, DRAM 페널티가 수백 사이클이면 미스율 1 %p 차이도 접근 시간에 크게 영향을 준다.","ch":"hierarchy"},
     { ko: "지연 시간", en: "Latency", abbr: "", def: "요청부터 첫 데이터가 도착할 때까지 걸리는 시간. L1 약 1 ns, DRAM 약 80~120 ns(로드-투-유즈), NAND SSD 약 50~100 µs 수준이다.", ch: "hierarchy" },
     { ko: "대역폭", en: "Bandwidth", abbr: "BW", def: "단위 시간당 전달할 수 있는 데이터 양(GB/s). 버스 폭 × 전송률로 계산하며, 지연과는 독립적인 성능 축이다.", ch: "hierarchy" },
-    { ko: "휘발성 / 비휘발성", en: "Volatile / Non-volatile", abbr: "", def: "전원이 꺼지면 데이터가 사라지는 메모리(SRAM·DRAM)와 유지되는 메모리(NAND·NOR·MRAM 등). 비휘발성은 보통 쓰기 속도와 내구성을 대가로 치른다.", ch: "hierarchy" },
+    {"ko":"휘발성","en":"Volatile","abbr":"","def":"전원이 꺼지면 저장한 데이터가 사라지는 성질. SRAM과 DRAM이 대표적인 휘발성 메모리다.","ch":"hierarchy"},
+    {"ko":"비휘발성","en":"Non-volatile","abbr":"","def":"전원이 꺼져도 저장한 데이터가 유지되는 성질. NAND·NOR·MRAM 등이 해당하며, 보통 쓰기 속도와 내구성 사이의 절충이 필요하다.","ch":"hierarchy"},
 
     // 02 메모리 소자 물리
     { ko: "모스펫", en: "Metal-oxide-semiconductor field-effect transistor", abbr: "MOSFET", def: "게이트 전압으로 채널의 전도를 켜고 끄는 트랜지스터. 메모리 셀의 접근 스위치이자 주변 회로의 기본 소자다.", ch: "device" },
@@ -64,13 +66,16 @@
     { ko: "6T 셀", en: "6-transistor SRAM cell", abbr: "6T", def: "풀업 PMOS 2개·풀다운 NMOS 2개로 된 교차 결합 인버터와 접근 트랜지스터 2개로 이뤄진 표준 SRAM 셀.", ch: "sram" },
     { ko: "정적 잡음 여유", en: "Static noise margin", abbr: "SNM", def: "SRAM 셀이 상태를 잃지 않고 견딜 수 있는 최대 잡음 전압. 버터플라이 곡선 두 눈에 내접하는 가장 큰 정사각형의 한 변으로 정의한다.", ch: "sram" },
     { ko: "버터플라이 곡선", en: "Butterfly curve", abbr: "", def: "교차 결합된 두 인버터의 전달 특성을 겹쳐 그린 그림. 나비 날개 모양의 두 눈이 클수록 SNM이 크다. 읽기 중에는 눈이 작아진다.", ch: "sram" },
-    { ko: "셀 비율 / 풀업 비율", en: "Cell ratio / Pull-up ratio", abbr: "CR / PR", def: "풀다운과 접근 트랜지스터의 강도 비(CR)는 읽기 안정성을, 접근과 풀업 트랜지스터의 강도 비(PR)는 쓰기 가능성을 결정한다.", ch: "sram" },
+    {"ko":"셀 비율","en":"Cell ratio","abbr":"CR","def":"SRAM 셀에서 풀다운 트랜지스터와 접근 트랜지스터의 강도 비. 읽기 안정성을 결정한다.","ch":"sram"},
+    {"ko":"풀업 비율","en":"Pull-up ratio","abbr":"PR","def":"SRAM 셀에서 접근 트랜지스터와 풀업 트랜지스터의 강도 비. 쓰기 가능성을 결정한다.","ch":"sram"},
     { ko: "센스 앰프", en: "Sense amplifier", abbr: "SA", def: "비트라인의 작은 전압차(수십~수백 mV)를 감지해 전원 레벨까지 증폭하는 회로. 보통 교차 결합 래치 형태이며 SRAM과 DRAM 모두의 핵심이다.", ch: "sram" },
     { ko: "캐시 라인", en: "Cache line", abbr: "", def: "캐시와 하위 메모리가 주고받는 최소 단위 블록. 현대 CPU는 보통 64바이트이며 태그·유효 비트와 함께 저장된다.", ch: "sram" },
     { ko: "캐시 연관도", en: "Cache associativity", abbr: "", def: "한 주소가 들어갈 수 있는 캐시 위치의 수. 직접 사상(1-way), N-way 집합 연관, 완전 연관이 있으며 연관도가 높을수록 충돌 미스가 줄지만 비교기가 는다.", ch: "sram" },
     { ko: "LRU 교체", en: "Least recently used replacement", abbr: "LRU", def: "집합에서 가장 오래 쓰이지 않은 라인을 내보내는 교체 정책. 연관도가 크면 실제로는 트리 기반 의사 LRU(PLRU)로 근사한다.", ch: "sram" },
-    { ko: "3C 미스", en: "Compulsory / Capacity / Conflict misses", abbr: "3C", def: "캐시 미스를 첫 접근(강제), 용량 부족(용량), 같은 집합 경쟁(충돌) 세 원인으로 나누는 분류.", ch: "sram" },
-    { ko: "쓰기 정책", en: "Write-back / Write-through", abbr: "", def: "쓰기를 캐시에만 하고 교체 시 내려보내는 write-back(더티 비트 필요)과 매번 하위 메모리에도 쓰는 write-through 방식.", ch: "sram" },
+    {"ko":"3C 미스","en":"3C cache misses","abbr":"3C","def":"캐시 미스를 첫 접근(강제), 용량 부족(용량), 같은 집합 경쟁(충돌) 세 원인으로 나누는 분류.","ch":"sram"},
+    {"ko":"쓰기 정책","en":"Cache write policy","abbr":"","def":"캐시에 쓰기를 할 때 하위 메모리에 반영하는 시점을 정하는 규칙. write-back과 write-through가 대표적이다.","ch":"sram"},
+    {"ko":"라이트백","en":"Write-back","abbr":"","def":"쓰기를 캐시에만 반영하고, 해당 캐시 라인을 교체할 때 하위 메모리로 내려보내는 정책. 변경 여부를 기록하는 더티 비트가 필요하다.","ch":"sram"},
+    {"ko":"라이트스루","en":"Write-through","abbr":"","def":"캐시에 쓸 때마다 하위 메모리에도 함께 반영하는 쓰기 정책.","ch":"sram"},
 
     // 04 DRAM 셀과 어레이
     { ko: "DRAM", en: "Dynamic random-access memory", abbr: "DRAM", def: "커패시터의 전하 유무로 비트를 저장하는 메모리. 전하가 새므로 주기적인 리프레시가 필요해 '동적'이라 부른다.", ch: "dram-cell" },
@@ -83,28 +88,35 @@
     { ko: "매립 채널 어레이 트랜지스터", en: "Buried channel array transistor", abbr: "BCAT", def: "워드라인을 실리콘 트렌치 안에 묻은 셀 트랜지스터. 유효 채널 길이를 늘려 누설을 줄이면서 6F² 셀을 가능케 한 현대 DRAM의 표준 구조다.", ch: "dram-cell" },
     { ko: "실린더 커패시터", en: "Cylinder capacitor", abbr: "", def: "셀 위에 높게 세운 원통형 스토리지 커패시터. 종횡비 수십:1의 구조로 좁은 면적에서 표면적을 확보하며, 넘어짐을 막으려 지지막(supporter)을 쓴다.", ch: "dram-cell" },
     { ko: "수직 채널 트랜지스터", en: "Vertical channel transistor", abbr: "VCT", def: "채널을 수직으로 세우고 게이트가 둘러싸는 셀 트랜지스터. 4F² 셀을 목표로 하며 3D DRAM과 함께 차세대 후보로 개발 중이다.", ch: "dram-cell" },
-    { ko: "4F² / 6F²", en: "Cell area in F²", abbr: "F²", def: "최소 선폭 F의 제곱으로 표시한 셀 면적. 현재 DRAM은 6F², 이론적 최소 교차점 셀은 4F²다.", ch: "dram-cell" },
+    {"ko":"4F²","en":"4F² cell area","abbr":"","def":"최소 선폭 F의 제곱을 기준으로 면적이 4F²인 셀. 이론적 최소 교차점 셀의 면적이다.","ch":"dram-cell"},
+    {"ko":"6F²","en":"6F² cell area","abbr":"","def":"최소 선폭 F의 제곱을 기준으로 면적이 6F²인 셀. 현재 DRAM 셀의 대표적인 면적이다.","ch":"dram-cell"},
     { ko: "하프 VDD 프리차지", en: "Half-VDD precharge", abbr: "VBLP", def: "비트라인 쌍을 VDD/2로 미리 맞춰 두는 방식. 0과 1 모두 같은 크기의 신호(±ΔV)를 만들고 프리차지 전력을 줄인다.", ch: "dram-cell" },
     { ko: "서브어레이 / 매트", en: "Subarray / Mat", abbr: "", def: "로컬 워드라인·비트라인·센스 앰프를 공유하는 셀 묶음(예: 512×512). 배선 길이를 제한해 RC 지연과 비트라인 커패시턴스를 줄인다.", ch: "dram-cell" },
 
     // 05 DRAM 동작과 타이밍
     { ko: "액티브 명령", en: "Activate", abbr: "ACT", def: "지정한 로우의 워드라인을 열고 센스 앰프로 한 페이지(수 KB)를 읽어 로우 버퍼에 올리는 명령.", ch: "dram-ops" },
     { ko: "프리차지 명령", en: "Precharge", abbr: "PRE", def: "열린 로우를 닫고 비트라인을 VDD/2로 되돌려 다음 ACT를 준비하는 명령.", ch: "dram-ops" },
-    { ko: "읽기/쓰기 명령", en: "Read / Write", abbr: "RD / WR", def: "열린 로우 버퍼에서 컬럼 주소를 골라 버스트 단위로 데이터를 읽거나 쓰는 명령.", ch: "dram-ops" },
+    {"ko":"읽기 명령","en":"Read command","abbr":"RD","def":"열린 DRAM 로우 버퍼에서 컬럼 주소를 골라 버스트 단위로 데이터를 읽는 명령.","ch":"dram-ops"},
+    {"ko":"쓰기 명령","en":"Write command","abbr":"WR","def":"열린 DRAM 로우 버퍼에서 컬럼 주소를 골라 버스트 단위로 데이터를 쓰는 명령.","ch":"dram-ops"},
     { ko: "tRCD", en: "RAS-to-CAS delay", abbr: "tRCD", def: "ACT부터 같은 뱅크에 RD/WR을 낼 수 있을 때까지의 최소 시간. 센싱과 증폭에 필요하며 세대가 바뀌어도 약 13~15 ns로 거의 같다.", ch: "dram-ops" },
     { ko: "CAS 지연", en: "CAS latency", abbr: "CL", def: "RD 명령부터 첫 데이터가 나올 때까지의 클록 수. DDR5-6400 CL52는 약 16 ns로, 클록 수는 늘었지만 절대 시간은 비슷하다.", ch: "dram-ops" },
     { ko: "tRP", en: "Row precharge time", abbr: "tRP", def: "PRE부터 같은 뱅크에 다음 ACT를 낼 수 있을 때까지의 최소 시간(약 14 ns).", ch: "dram-ops" },
     { ko: "tRAS", en: "Row active time", abbr: "tRAS", def: "ACT부터 PRE까지 로우가 열려 있어야 하는 최소 시간(약 32 ns). 센스 앰프가 셀을 완전히 재충전(restore)할 시간을 보장한다.", ch: "dram-ops" },
     { ko: "tRC", en: "Row cycle time", abbr: "tRC", def: "같은 뱅크에서 연속 ACT 사이의 최소 간격. tRC = tRAS + tRP로 약 45~50 ns이며, 랜덤 접근 성능의 근본 한계다.", ch: "dram-ops" },
-    { ko: "tRRD / tFAW", en: "Row-to-row delay / Four activate window", abbr: "tFAW", def: "서로 다른 뱅크 간 ACT 최소 간격(tRRD)과, 어떤 시간 창 안에 ACT를 최대 4번만 허용하는 제약(tFAW). 순간 전류와 전원 잡음을 제한한다.", ch: "dram-ops" },
+    {"ko":"tRRD","en":"Row-to-row delay","abbr":"tRRD","def":"서로 다른 뱅크에 내리는 ACT 명령 사이의 최소 간격. 순간 전류와 전원 잡음을 제한한다.","ch":"dram-ops"},
+    {"ko":"tFAW","en":"Four activate window","abbr":"tFAW","def":"어떤 시간 창 안에 ACT 명령을 최대 4번만 허용하는 제약. 순간 전류와 전원 잡음을 제한한다.","ch":"dram-ops"},
     { ko: "로우 버퍼", en: "Row buffer", abbr: "", def: "ACT로 열린 로우의 데이터를 붙잡고 있는 센스 앰프 배열. 같은 로우를 다시 읽으면(로우 히트) tRCD·tRP 없이 CL만으로 접근한다.", ch: "dram-ops" },
-    { ko: "로우 히트 / 미스 / 충돌", en: "Row hit / miss / conflict", abbr: "", def: "요청 로우가 이미 열려 있으면 히트(CL), 닫혀 있으면 미스(tRCD+CL), 다른 로우가 열려 있으면 충돌(tRP+tRCD+CL)이다.", ch: "dram-ops" },
+    {"ko":"로우 히트","en":"Row hit","abbr":"","def":"요청한 로우가 이미 로우 버퍼에 열려 있는 상태. ACT·PRE 없이 읽을 수 있으며 지연은 CL에 해당한다.","ch":"dram-ops"},
+    {"ko":"로우 미스","en":"Row miss","abbr":"","def":"요청한 뱅크에 열린 로우가 없는 상태. ACT 후 읽어야 하므로 지연은 tRCD + CL에 해당한다.","ch":"dram-ops"},
+    {"ko":"로우 충돌","en":"Row conflict","abbr":"","def":"요청한 로우와 다른 로우가 같은 뱅크에 열려 있는 상태. PRE와 ACT를 거쳐야 하므로 지연은 tRP + tRCD + CL에 해당한다.","ch":"dram-ops"},
     { ko: "뱅크", en: "Bank", abbr: "", def: "독립적으로 ACT/PRE할 수 있는 DRAM 내부 어레이 단위. 여러 뱅크를 겹쳐 동작(인터리빙)시켜 tRC의 한계를 숨긴다. DDR5는 칩당 32뱅크(16Gb 기준).", ch: "dram-ops" },
     { ko: "뱅크 그룹", en: "Bank group", abbr: "BG", def: "내부 데이터 경로를 공유하는 뱅크 묶음. 같은 그룹 내 연속 접근은 긴 tCCD_L, 다른 그룹 간은 짧은 tCCD_S가 적용된다(DDR4부터).", ch: "dram-ops" },
     { ko: "리프레시", en: "Refresh", abbr: "REF", def: "누설로 사라지는 셀 전하를 읽고 다시 써서 복원하는 동작. 모든 로우를 보통 32 ms(DDR5) 또는 64 ms(DDR4, 85 °C 이하) 안에 한 번씩 리프레시한다.", ch: "dram-ops" },
     { ko: "tREFI", en: "Refresh interval", abbr: "tREFI", def: "REF 명령 사이의 평균 간격. DDR4는 7.8 µs, DDR5는 3.9 µs이며 고온에서는 절반으로 줄인다.", ch: "dram-ops" },
     { ko: "tRFC", en: "Refresh cycle time", abbr: "tRFC", def: "REF 한 번에 걸리는 시간으로, 이 동안 해당 랭크(또는 뱅크)에 접근할 수 없다. 칩 용량이 커질수록 길어져 16Gb DDR5에서 약 295 ns다.", ch: "dram-ops" },
-    { ko: "페이지 정책", en: "Open-page / Close-page policy", abbr: "", def: "접근 후 로우를 열어 두는 오픈 페이지(지역성 높을 때 유리)와 즉시 닫는 클로즈 페이지(랜덤 접근에 유리) 정책. 메모리 컨트롤러가 선택한다.", ch: "dram-ops" },
+    {"ko":"페이지 정책","en":"DRAM page policy","abbr":"","def":"DRAM 접근 후 로우를 계속 열어 둘지 닫을지 정하는 메모리 컨트롤러의 정책.","ch":"dram-ops"},
+    {"ko":"오픈 페이지","en":"Open-page","abbr":"","def":"DRAM 접근 후 로우를 열어 두는 페이지 정책. 같은 로우에 다시 접근하는 지역성이 높을 때 유리하다.","ch":"dram-ops"},
+    {"ko":"클로즈 페이지","en":"Close-page","abbr":"","def":"DRAM 접근 후 로우를 즉시 닫는 페이지 정책. 랜덤 접근에 유리하다.","ch":"dram-ops"},
 
     // 06 인터페이스
     { ko: "더블 데이터 레이트", en: "Double data rate", abbr: "DDR", def: "클록(또는 스트로브)의 상승·하강 에지 모두에서 데이터를 전송하는 방식. DDR5-6400은 3.2 GHz 클록에서 6400 MT/s를 낸다.", ch: "interface" },
@@ -146,11 +158,14 @@
     { ko: "플로팅 게이트", en: "Floating gate", abbr: "FG", def: "절연막으로 완전히 둘러싸인 폴리실리콘 전극에 전자를 가두는 플래시 셀 구조. 도체라서 결함 하나로도 전하가 모두 샐 수 있다.", ch: "nand" },
     { ko: "차지 트랩 플래시", en: "Charge trap flash", abbr: "CTF", def: "질화막(SiN)의 트랩에 전자를 국소적으로 가두는 셀 구조. 절연체라 누설 경로에 강하고 얇게 만들 수 있어 3D NAND의 표준이 되었다.", ch: "nand" },
     { ko: "증분 스텝 펄스 프로그래밍", en: "Incremental step pulse programming", abbr: "ISPP", def: "프로그램 전압을 조금씩(예: 0.2~0.5 V) 올리며 펄스와 검증(verify)을 반복하는 방식. Vt 분포를 좁게 만들지만 단계 수만큼 쓰기가 느려진다.", ch: "nand" },
-    { ko: "SLC / MLC / TLC / QLC", en: "Single / Multi / Triple / Quad-level cell", abbr: "SLC~QLC", def: "셀당 1/2/3/4비트를 저장하는 방식으로 Vt 상태가 2/4/8/16개다. 비트가 늘수록 밀도는 오르지만 마진·속도·내구성(P/E 약 10만→3천→1천 회 이하)이 떨어진다.", ch: "nand" },
+    {"ko":"SLC","en":"Single-level cell","abbr":"SLC","def":"셀당 1비트를 저장하는 NAND 방식. 문턱 전압 상태가 2개이며, 셀당 여러 비트를 저장하는 방식보다 밀도는 낮지만 마진·속도·내구성에 유리하다.","ch":"nand"},
+    {"ko":"MLC","en":"Multi-level cell","abbr":"MLC","def":"이 책에서는 셀당 2비트를 저장하는 NAND 방식. 문턱 전압 상태가 4개이며, SLC보다 밀도가 높지만 상태 사이의 마진이 줄어든다.","ch":"nand"},
+    {"ko":"TLC","en":"Triple-level cell","abbr":"TLC","def":"셀당 3비트를 저장하는 NAND 방식. 문턱 전압 상태가 8개이며, 비트 수가 늘어나는 만큼 밀도는 높아지고 마진·속도·내구성은 줄어든다.","ch":"nand"},
+    {"ko":"QLC","en":"Quad-level cell","abbr":"QLC","def":"셀당 4비트를 저장하는 NAND 방식. 문턱 전압 상태가 16개로 밀도가 높지만, 상태 사이의 마진이 좁아 속도와 내구성에 불리하다.","ch":"nand"},
     { ko: "패스 전압", en: "Pass voltage", abbr: "Vpass", def: "NAND 읽기·프로그램 때 선택되지 않은 워드라인에 거는 높은 전압(약 6~10 V). 스트링의 다른 셀을 모두 켜 통로로 만든다.", ch: "nand" },
     { ko: "페이지", en: "Page", abbr: "", def: "NAND에서 읽기·쓰기의 기본 단위로, 한 워드라인의 셀들이다. 크기는 보통 16 KB 수준이며 덮어쓰기는 불가능하다.", ch: "nand" },
     { ko: "블록", en: "Block", abbr: "", def: "NAND에서 소거의 기본 단위로 수백~수천 페이지(수~수십 MB)다. 소거는 기판(웰)에 고전압을 걸어 블록 전체를 한꺼번에 지운다.", ch: "nand" },
-    { ko: "프로그램 / 소거 사이클", en: "Program/erase cycle", abbr: "P/E", def: "셀을 한 번 쓰고 지우는 횟수. 반복할수록 터널 산화막에 결함이 쌓여 Vt 분포가 퍼지고 결국 수명이 다한다.", ch: "nand" },
+    {"ko":"프로그램·소거 사이클","en":"Program/erase cycle","abbr":"P/E","def":"셀을 한 번 쓰고 지우는 횟수. 반복할수록 터널 산화막에 결함이 쌓여 Vt 분포가 퍼지고 결국 수명이 다한다.","ch":"nand"},
     { ko: "Vt 분포", en: "Threshold voltage distribution", abbr: "", def: "같은 상태로 프로그램된 셀들의 Vt 산포. 인접 상태 분포가 겹치면 읽기 오류가 나므로 읽기 기준 전압을 분포 사이 골에 둔다.", ch: "nand" },
     { ko: "셀 간 간섭", en: "Cell-to-cell interference", abbr: "", def: "이웃 셀의 저장 전하가 커패시턴스 결합으로 대상 셀의 Vt를 옮기는 현상. 미세화될수록 커져 2D NAND 축소의 한계가 되었다.", ch: "nand" },
     { ko: "프로그램 디스터브", en: "Program disturb", abbr: "", def: "선택 셀을 프로그램할 때 같은 워드라인·스트링의 비선택 셀이 약하게 프로그램되는 현상. 셀프 부스팅으로 비선택 채널 전위를 올려 막는다.", ch: "nand" },
@@ -972,7 +987,12 @@
       if (active) active.removeAttribute("aria-describedby");
       active = target;
       const title = document.createElement("strong"), definition = document.createElement("p");
-      title.textContent = term.ko + (term.abbr ? " · " + term.abbr : "");
+      // Only show the abbreviation being explained, and never repeat the same name.
+      const abbreviations = term.abbr.split(/\s+\/\s+/).filter(Boolean);
+      const selected = abbreviations.find((abbr) => abbr.toLowerCase() === target.textContent.toLowerCase());
+      const names = [term.ko, selected || (abbreviations.length === 1 ? abbreviations[0] : "")];
+      title.textContent = names.filter((name, i) => name &&
+        !names.slice(0, i).some((previous) => previous.toLowerCase() === name.toLowerCase())).join(" · ");
       definition.textContent = term.def;
       tooltip.replaceChildren(title, definition);
       tooltip.hidden = false;
